@@ -100,50 +100,90 @@ Hooks.Map = {
 
 Hooks.MapBox = {
   mounted() {
-    // ADD YOUR ACCESS TOKEN FROM
-    // https://account.mapbox.com
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoiYW5uZXRvdG9oIiwiYSI6ImNsYjB2cDl1dzFrOTQzcHFtOWdxcHBjbGgifQ.LADz9TYffPhRsjZ_O_hUHw";
-    var map = new mapboxgl.Map({
-      container: "mapbox",
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [-74.5, 40], // Initial center
-      zoom: 9, // Initial zoom
-    });
+    function initMap() {
+      const directionsRenderer = new google.maps.DirectionsRenderer();
+      const directionsService = new google.maps.DirectionsService();
+      const map = new google.maps.Map(document.getElementById("mapbox"), {
+        zoom: 14,
+        center: { lat: 37.77, lng: -122.447 },
+      });
 
-    var fixedStart = [-74.5, 40]; // Fixed starting coordinates
-    var fixedEnd = [-75, 41]; // Fixed ending coordinates
+      directionsRenderer.setMap(map);
+      calculateAndDisplayRoute(directionsService, directionsRenderer);
+    }
 
-    var directions = new MapboxDirections({
-      accessToken: mapboxgl.accessToken,
-      waypoints: [{ coordinates: fixedStart }, { coordinates: fixedEnd }],
-      controls: { inputs: false }, // Disable user input for fixed locations
-    });
+    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+      // Set the travel mode to "DRIVING" explicitly
+      const selectedMode = "DRIVING";
 
-    map.addControl(directions, "top-left");
+      directionsService
+        .route({
+          origin: { lat: 37.77, lng: -122.447 },
+          destination: { lat: 37.768, lng: -122.511 },
+          waypoints: [
+            {
+              location: { lat: 37.79, lng: -122.41 },
+              stopover: true,
+            },
+            {
+              location: { lat: 37.77, lng: -122.41 },
+              stopover: true,
+            },
+          ],
+          travelMode: google.maps.TravelMode[selectedMode],
+        })
+        .then((response) => {
+          directionsRenderer.setDirections(response);
+        })
+        .catch((e) =>
+          window.alert("Directions request failed due to " + status)
+        );
+    }
+
+    initMap();
   },
   updated() {
-    // ADD YOUR ACCESS TOKEN FROM
-    // https://account.mapbox.com
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoiYW5uZXRvdG9oIiwiYSI6ImNsYjB2cDl1dzFrOTQzcHFtOWdxcHBjbGgifQ.LADz9TYffPhRsjZ_O_hUHw";
-    var map = new mapboxgl.Map({
-      container: "mapbox",
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [-74.5, 40], // Initial center
-      zoom: 9, // Initial zoom
-    });
+    function initMap() {
+      const directionsRenderer = new google.maps.DirectionsRenderer();
+      const directionsService = new google.maps.DirectionsService();
+      const map = new google.maps.Map(document.getElementById("mapbox"), {
+        zoom: 14,
+        center: { lat: 37.77, lng: -122.447 },
+      });
 
-    var fixedStart = [-74.5, 40]; // Fixed starting coordinates
-    var fixedEnd = [-75, 41]; // Fixed ending coordinates
+      directionsRenderer.setMap(map);
+      calculateAndDisplayRoute(directionsService, directionsRenderer);
+    }
 
-    var directions = new MapboxDirections({
-      accessToken: mapboxgl.accessToken,
-      waypoints: [{ coordinates: fixedStart }, { coordinates: fixedEnd }],
-      controls: { inputs: false }, // Disable user input for fixed locations
-    });
+    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+      // Set the travel mode to "DRIVING" explicitly
+      const selectedMode = "DRIVING";
 
-    map.addControl(directions, "top-left");
+      directionsService
+        .route({
+          origin: { lat: 37.77, lng: -122.447 },
+          destination: { lat: 37.768, lng: -122.511 },
+          waypoints: [
+            {
+              location: { lat: 37.79, lng: -122.41 },
+              stopover: true,
+            },
+            {
+              location: { lat: 37.77, lng: -122.41 },
+              stopover: true,
+            },
+          ],
+          travelMode: google.maps.TravelMode[selectedMode],
+        })
+        .then((response) => {
+          directionsRenderer.setDirections(response);
+        })
+        .catch((e) =>
+          window.alert("Directions request failed due to " + status)
+        );
+    }
+
+    window.initMap = initMap;
   },
 };
 let liveSocket = new LiveSocket("/live", Socket, {

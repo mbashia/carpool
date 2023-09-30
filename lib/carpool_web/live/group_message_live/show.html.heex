@@ -1,0 +1,26 @@
+<h1>Show Group message</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.group_message_show_path(@socket, :show, @group_message)}>
+    <.live_component
+      module={CarpoolWeb.Group_messageLive.FormComponent}
+      id={@group_message.id}
+      title={@page_title}
+      action={@live_action}
+      group_message={@group_message}
+      return_to={Routes.group_message_show_path(@socket, :show, @group_message)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Text:</strong>
+    <%= @group_message.text %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.group_message_show_path(@socket, :edit, @group_message), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.group_message_index_path(@socket, :index) %></span>

@@ -1,0 +1,47 @@
+<h1>Listing Trips</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.trip_index_path(@socket, :index)}>
+    <.live_component
+      module={CarpoolWeb.TripLive.FormComponent}
+      id={@trip.id || :new}
+      title={@page_title}
+      action={@live_action}
+      trip={@trip}
+      return_to={Routes.trip_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>To</th>
+      <th>Capacity</th>
+      <th>Notes</th>
+      <th>Price</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="trips">
+    <%= for trip <- @trips do %>
+      <tr id={"trip-#{trip.id}"}>
+        <td><%= trip.from %></td>
+        <td><%= trip.to %></td>
+        <td><%= trip.capacity %></td>
+        <td><%= trip.notes %></td>
+        <td><%= trip.price %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.trip_show_path(@socket, :show, trip) %></span>
+          <span><%= live_patch "Edit", to: Routes.trip_index_path(@socket, :edit, trip) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: trip.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Trip", to: Routes.trip_index_path(@socket, :new) %></span>

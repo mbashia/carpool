@@ -1,0 +1,36 @@
+<h1>Show Booking</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.booking_show_path(@socket, :show, @booking)}>
+    <.live_component
+      module={CarpoolWeb.BookingLive.FormComponent}
+      id={@booking.id}
+      title={@page_title}
+      action={@live_action}
+      booking={@booking}
+      return_to={Routes.booking_show_path(@socket, :show, @booking)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @booking.status %>
+  </li>
+
+  <li>
+    <strong>Location:</strong>
+    <%= @booking.location %>
+  </li>
+
+  <li>
+    <strong>Notes:</strong>
+    <%= @booking.notes %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.booking_show_path(@socket, :edit, @booking), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.booking_index_path(@socket, :index) %></span>

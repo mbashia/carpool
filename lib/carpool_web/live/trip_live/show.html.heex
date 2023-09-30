@@ -1,0 +1,46 @@
+<h1>Show Trip</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.trip_show_path(@socket, :show, @trip)}>
+    <.live_component
+      module={CarpoolWeb.TripLive.FormComponent}
+      id={@trip.id}
+      title={@page_title}
+      action={@live_action}
+      trip={@trip}
+      return_to={Routes.trip_show_path(@socket, :show, @trip)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>From:</strong>
+    <%= @trip.from %>
+  </li>
+
+  <li>
+    <strong>To:</strong>
+    <%= @trip.to %>
+  </li>
+
+  <li>
+    <strong>Capacity:</strong>
+    <%= @trip.capacity %>
+  </li>
+
+  <li>
+    <strong>Notes:</strong>
+    <%= @trip.notes %>
+  </li>
+
+  <li>
+    <strong>Price:</strong>
+    <%= @trip.price %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.trip_show_path(@socket, :edit, @trip), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.trip_index_path(@socket, :index) %></span>

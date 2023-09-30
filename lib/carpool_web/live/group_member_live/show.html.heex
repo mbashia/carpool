@@ -1,0 +1,31 @@
+<h1>Show Group member</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.group_member_show_path(@socket, :show, @group_member)}>
+    <.live_component
+      module={CarpoolWeb.Group_memberLive.FormComponent}
+      id={@group_member.id}
+      title={@page_title}
+      action={@live_action}
+      group_member={@group_member}
+      return_to={Routes.group_member_show_path(@socket, :show, @group_member)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @group_member.user_id %>
+  </li>
+
+  <li>
+    <strong>Group:</strong>
+    <%= @group_member.group_id %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.group_member_show_path(@socket, :edit, @group_member), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.group_member_index_path(@socket, :index) %></span>

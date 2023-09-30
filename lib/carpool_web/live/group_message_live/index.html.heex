@@ -1,0 +1,39 @@
+<h1>Listing Group messages</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.group_message_index_path(@socket, :index)}>
+    <.live_component
+      module={CarpoolWeb.Group_messageLive.FormComponent}
+      id={@group_message.id || :new}
+      title={@page_title}
+      action={@live_action}
+      group_message={@group_message}
+      return_to={Routes.group_message_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Text</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="group_messages">
+    <%= for group_message <- @group_messages do %>
+      <tr id={"group_message-#{group_message.id}"}>
+        <td><%= group_message.text %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.group_message_show_path(@socket, :show, group_message) %></span>
+          <span><%= live_patch "Edit", to: Routes.group_message_index_path(@socket, :edit, group_message) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: group_message.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Group message", to: Routes.group_message_index_path(@socket, :new) %></span>

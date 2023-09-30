@@ -20,7 +20,7 @@ defmodule CarpoolWeb.Router do
   scope "/", CarpoolWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", PageLive.Index, :index
   end
 
   # Other scopes may use custom stacks.

@@ -8,13 +8,19 @@
     phx-target={@myself}
     phx-change="validate"
     phx-submit="save"
+    id="Map"
+    phx-hook="Map"
   >
+    <%= hidden_input(f, :latitude_from, id: "latitude_from_input") %>
+    <%= hidden_input(f, :latitude_to, id: "latitude_to_input") %>
+    <%= hidden_input(f, :longitude_from, id: "longitude_from_input") %>
+    <%= hidden_input(f, :longitude_to, id: "longitude_to_input") %>
     <%= label(f, :from) %>
-    <%= text_input(f, :from) %>
+    <%= text_input(f, :from, id: "location1") %>
     <%= error_tag(f, :from) %>
 
     <%= label(f, :to) %>
-    <%= text_input(f, :to) %>
+    <%= text_input(f, :to, id: "location2") %>
     <%= error_tag(f, :to) %>
 
     <%= label(f, :capacity) %>

@@ -1,0 +1,18 @@
+<main>
+  <%= if @flash["info"] do %>
+    <p class="alert alert-info" role="alert" phx-click="lv:clear-flash" phx-value-key="info">
+      <%= live_flash(@flash, :info) %>
+    </p>
+  <% end %>
+
+  <%= if @flash["error"] do %>
+    <p class="alert alert-danger" role="alert" phx-click="lv:clear-flash" phx-value-key="error">
+      <%= live_flash(@flash, :error) %>
+    </p>
+  <% end %>
+
+  <div class="w-[80px] fixed border-r-[1px] border-[#999999] h-[100vh] bg-white "></div>
+  <div class="ml-[80px]">
+    <%= @inner_content %>
+  </div>
+</main>

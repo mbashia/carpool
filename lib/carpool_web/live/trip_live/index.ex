@@ -1,5 +1,5 @@
 defmodule CarpoolWeb.TripLive.Index do
-  use CarpoolWeb, :live_view
+  use CarpoolWeb, :dashboard_live_view
 
   alias Carpool.Trips
   alias Carpool.Trips.Trip
@@ -8,9 +8,11 @@ defmodule CarpoolWeb.TripLive.Index do
   @impl true
   def mount(_params, session, socket) do
     user = Accounts.get_user_by_session_token(session["user_token"])
-{:ok, socket
-|>assign(:trips, list_trips())
-|>assign(:user,user)}
+
+    {:ok,
+     socket
+     |> assign(:trips, list_trips())
+     |> assign(:user, user)}
   end
 
   @impl true

@@ -1,5 +1,5 @@
 defmodule CarpoolWeb.MessageLive.Index do
-  use CarpoolWeb, :live_view
+  use CarpoolWeb, :dashboard_live_view
 
   alias Carpool.Messages
   alias Carpool.Messages.Message

@@ -97,6 +97,55 @@ Hooks.Map = {
     });
   },
 };
+
+Hooks.MapBox = {
+  mounted() {
+    // ADD YOUR ACCESS TOKEN FROM
+    // https://account.mapbox.com
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoiYW5uZXRvdG9oIiwiYSI6ImNsYjB2cDl1dzFrOTQzcHFtOWdxcHBjbGgifQ.LADz9TYffPhRsjZ_O_hUHw";
+    var map = new mapboxgl.Map({
+      container: "mapbox",
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [-74.5, 40], // Initial center
+      zoom: 9, // Initial zoom
+    });
+
+    var fixedStart = [-74.5, 40]; // Fixed starting coordinates
+    var fixedEnd = [-75, 41]; // Fixed ending coordinates
+
+    var directions = new MapboxDirections({
+      accessToken: mapboxgl.accessToken,
+      waypoints: [{ coordinates: fixedStart }, { coordinates: fixedEnd }],
+      controls: { inputs: false }, // Disable user input for fixed locations
+    });
+
+    map.addControl(directions, "top-left");
+  },
+  updated() {
+    // ADD YOUR ACCESS TOKEN FROM
+    // https://account.mapbox.com
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoiYW5uZXRvdG9oIiwiYSI6ImNsYjB2cDl1dzFrOTQzcHFtOWdxcHBjbGgifQ.LADz9TYffPhRsjZ_O_hUHw";
+    var map = new mapboxgl.Map({
+      container: "mapbox",
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [-74.5, 40], // Initial center
+      zoom: 9, // Initial zoom
+    });
+
+    var fixedStart = [-74.5, 40]; // Fixed starting coordinates
+    var fixedEnd = [-75, 41]; // Fixed ending coordinates
+
+    var directions = new MapboxDirections({
+      accessToken: mapboxgl.accessToken,
+      waypoints: [{ coordinates: fixedStart }, { coordinates: fixedEnd }],
+      controls: { inputs: false }, // Disable user input for fixed locations
+    });
+
+    map.addControl(directions, "top-left");
+  },
+};
 let liveSocket = new LiveSocket("/live", Socket, {
   hooks: Hooks,
   params: { _csrf_token: csrfToken },

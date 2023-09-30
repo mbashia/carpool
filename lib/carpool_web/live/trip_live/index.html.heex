@@ -8,7 +8,7 @@
       title={@page_title}
       action={@live_action}
       trip={@trip}
-      user = {@user}
+      user={@user}
       return_to={Routes.trip_index_path(@socket, :index)}
     />
   </.modal>
@@ -55,3 +55,7 @@
 </table>
 
 <span><%= live_patch("New Trip", to: Routes.trip_index_path(@socket, :new)) %></span>
+
+<div class="bg-black py-8">
+  <div phx-hook="MapBox" class="h-[50vh]  mx-auto  z-0 w-[80%]" id="mapbox"></div>
+</div>

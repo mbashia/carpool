@@ -5,7 +5,11 @@ defmodule CarpoolWeb.BookingLiveTest do
   import Carpool.BookingsFixtures
 
   @create_attrs %{location: "some location", notes: "some notes", status: "some status"}
-  @update_attrs %{location: "some updated location", notes: "some updated notes", status: "some updated status"}
+  @update_attrs %{
+    location: "some updated location",
+    notes: "some updated notes",
+    status: "some updated status"
+  }
   @invalid_attrs %{location: nil, notes: nil, status: nil}
 
   defp create_booking(_) do

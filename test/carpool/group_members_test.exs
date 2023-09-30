@@ -23,7 +23,9 @@ defmodule Carpool.Group_membersTest do
     test "create_group_member/1 with valid data creates a group_member" do
       valid_attrs = %{group_id: "some group_id", user_id: "some user_id"}
 
-      assert {:ok, %Group_member{} = group_member} = Group_members.create_group_member(valid_attrs)
+      assert {:ok, %Group_member{} = group_member} =
+               Group_members.create_group_member(valid_attrs)
+
       assert group_member.group_id == "some group_id"
       assert group_member.user_id == "some user_id"
     end
@@ -36,14 +38,19 @@ defmodule Carpool.Group_membersTest do
       group_member = group_member_fixture()
       update_attrs = %{group_id: "some updated group_id", user_id: "some updated user_id"}
 
-      assert {:ok, %Group_member{} = group_member} = Group_members.update_group_member(group_member, update_attrs)
+      assert {:ok, %Group_member{} = group_member} =
+               Group_members.update_group_member(group_member, update_attrs)
+
       assert group_member.group_id == "some updated group_id"
       assert group_member.user_id == "some updated user_id"
     end
 
     test "update_group_member/2 with invalid data returns error changeset" do
       group_member = group_member_fixture()
-      assert {:error, %Ecto.Changeset{}} = Group_members.update_group_member(group_member, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Group_members.update_group_member(group_member, @invalid_attrs)
+
       assert group_member == Group_members.get_group_member!(group_member.id)
     end
 

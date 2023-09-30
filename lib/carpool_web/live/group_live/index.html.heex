@@ -8,6 +8,7 @@
       title={@page_title}
       action={@live_action}
       group={@group}
+      user={@user}
       return_to={Routes.group_index_path(@socket, :index)}
     />
   </.modal>
@@ -29,13 +30,24 @@
         <td><%= group.description %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.group_show_path(@socket, :show, group) %></span>
-          <span><%= live_patch "Edit", to: Routes.group_index_path(@socket, :edit, group) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: group.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show", to: Routes.group_show_path(@socket, :show, group)) %>
+          </span>
+          <span>
+            <%= live_patch("Edit", to: Routes.group_index_path(@socket, :edit, group)) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: group.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Group", to: Routes.group_index_path(@socket, :new) %></span>
+<span><%= live_patch("New Group", to: Routes.group_index_path(@socket, :new)) %></span>

@@ -35,7 +35,12 @@ defmodule Carpool.BookingsTest do
 
     test "update_booking/2 with valid data updates the booking" do
       booking = booking_fixture()
-      update_attrs = %{location: "some updated location", notes: "some updated notes", status: "some updated status"}
+
+      update_attrs = %{
+        location: "some updated location",
+        notes: "some updated notes",
+        status: "some updated status"
+      }
 
       assert {:ok, %Booking{} = booking} = Bookings.update_booking(booking, update_attrs)
       assert booking.location == "some updated location"

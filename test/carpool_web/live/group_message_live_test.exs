@@ -48,7 +48,9 @@ defmodule CarpoolWeb.Group_messageLiveTest do
     test "updates group_message in listing", %{conn: conn, group_message: group_message} do
       {:ok, index_live, _html} = live(conn, Routes.group_message_index_path(conn, :index))
 
-      assert index_live |> element("#group_message-#{group_message.id} a", "Edit") |> render_click() =~
+      assert index_live
+             |> element("#group_message-#{group_message.id} a", "Edit")
+             |> render_click() =~
                "Edit Group message"
 
       assert_patch(index_live, Routes.group_message_index_path(conn, :edit, group_message))
@@ -70,7 +72,10 @@ defmodule CarpoolWeb.Group_messageLiveTest do
     test "deletes group_message in listing", %{conn: conn, group_message: group_message} do
       {:ok, index_live, _html} = live(conn, Routes.group_message_index_path(conn, :index))
 
-      assert index_live |> element("#group_message-#{group_message.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#group_message-#{group_message.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#group_message-#{group_message.id}")
     end
   end
@@ -79,14 +84,16 @@ defmodule CarpoolWeb.Group_messageLiveTest do
     setup [:create_group_message]
 
     test "displays group_message", %{conn: conn, group_message: group_message} do
-      {:ok, _show_live, html} = live(conn, Routes.group_message_show_path(conn, :show, group_message))
+      {:ok, _show_live, html} =
+        live(conn, Routes.group_message_show_path(conn, :show, group_message))
 
       assert html =~ "Show Group message"
       assert html =~ group_message.text
     end
 
     test "updates group_message within modal", %{conn: conn, group_message: group_message} do
-      {:ok, show_live, _html} = live(conn, Routes.group_message_show_path(conn, :show, group_message))
+      {:ok, show_live, _html} =
+        live(conn, Routes.group_message_show_path(conn, :show, group_message))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Group message"

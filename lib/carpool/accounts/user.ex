@@ -1,6 +1,11 @@
 defmodule Carpool.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Carpool.Groups.Group
+  alias Carpool.Group_messages.Group_message
+  alias Carpool.Trips.Trip
+  alias Carpool.Bookings.Booking
+  alias Carpool.Messages.Message
 
   schema "users" do
     field :firstname, :string
@@ -10,6 +15,11 @@ defmodule Carpool.Accounts.User do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    has_many :groups, Group
+    has_many :group_messages, Group_message
+    has_many :trips, Trip
+    has_many :bookings, Booking
+    has_many :messages , Message
 
     timestamps()
   end
@@ -33,7 +43,7 @@ defmodule Carpool.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password,:firstname,:lastname, :location])
+    |> cast(attrs, [:email, :password, :firstname, :lastname, :location])
     |> validate_email()
     |> validate_password(opts)
   end

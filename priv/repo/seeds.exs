@@ -9,3 +9,17 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+alias Carpool.Repo
+alias Carpool.Accounts.User
+alias Carpool.Accounts
+
+user = %{
+  firstname: "admin",
+  lastname: "one",
+  email: "admin@gmail.com",
+  location: "thika",
+  # In a real application, you'd hash the password
+  password: "123456"
+}
+
+Accounts.register_user(user)

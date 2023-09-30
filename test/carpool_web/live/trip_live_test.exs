@@ -4,8 +4,20 @@ defmodule CarpoolWeb.TripLiveTest do
   import Phoenix.LiveViewTest
   import Carpool.TripsFixtures
 
-  @create_attrs %{capacity: "some capacity", from: "some from", notes: "some notes", price: "some price", to: "some to"}
-  @update_attrs %{capacity: "some updated capacity", from: "some updated from", notes: "some updated notes", price: "some updated price", to: "some updated to"}
+  @create_attrs %{
+    capacity: "some capacity",
+    from: "some from",
+    notes: "some notes",
+    price: "some price",
+    to: "some to"
+  }
+  @update_attrs %{
+    capacity: "some updated capacity",
+    from: "some updated from",
+    notes: "some updated notes",
+    price: "some updated price",
+    to: "some updated to"
+  }
   @invalid_attrs %{capacity: nil, from: nil, notes: nil, price: nil, to: nil}
 
   defp create_trip(_) do

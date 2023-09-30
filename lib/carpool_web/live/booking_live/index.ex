@@ -3,10 +3,15 @@ defmodule CarpoolWeb.BookingLive.Index do
 
   alias Carpool.Bookings
   alias Carpool.Bookings.Booking
+  alias Carpool.Accounts
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :bookings, list_bookings())}
+  def mount(_params, session, socket) do
+    user= Accounts.get_user_by_session_token(session["user_token"])
+
+{:ok, socket
+|>assign(:bookings, list_bookings())
+|>assign(:user, user)}
   end
 
   @impl true

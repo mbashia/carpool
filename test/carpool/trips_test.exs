@@ -21,7 +21,13 @@ defmodule Carpool.TripsTest do
     end
 
     test "create_trip/1 with valid data creates a trip" do
-      valid_attrs = %{capacity: "some capacity", from: "some from", notes: "some notes", price: "some price", to: "some to"}
+      valid_attrs = %{
+        capacity: "some capacity",
+        from: "some from",
+        notes: "some notes",
+        price: "some price",
+        to: "some to"
+      }
 
       assert {:ok, %Trip{} = trip} = Trips.create_trip(valid_attrs)
       assert trip.capacity == "some capacity"
@@ -37,7 +43,14 @@ defmodule Carpool.TripsTest do
 
     test "update_trip/2 with valid data updates the trip" do
       trip = trip_fixture()
-      update_attrs = %{capacity: "some updated capacity", from: "some updated from", notes: "some updated notes", price: "some updated price", to: "some updated to"}
+
+      update_attrs = %{
+        capacity: "some updated capacity",
+        from: "some updated from",
+        notes: "some updated notes",
+        price: "some updated price",
+        to: "some updated to"
+      }
 
       assert {:ok, %Trip{} = trip} = Trips.update_trip(trip, update_attrs)
       assert trip.capacity == "some updated capacity"

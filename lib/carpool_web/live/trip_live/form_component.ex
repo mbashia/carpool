@@ -41,7 +41,10 @@ defmodule CarpoolWeb.TripLive.FormComponent do
   end
 
   defp save_trip(socket, :new, trip_params) do
-    case Trips.create_trip(trip_params) do
+    new_trip_params =
+    trip_params
+    |>Map.put("user_id", socket.assigns.user.id)
+    case Trips.create_trip(new_trip_params) do
       {:ok, _trip} ->
         {:noreply,
          socket

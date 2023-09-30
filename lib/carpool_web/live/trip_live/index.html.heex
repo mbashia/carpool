@@ -8,6 +8,7 @@
       title={@page_title}
       action={@live_action}
       trip={@trip}
+      user = {@user}
       return_to={Routes.trip_index_path(@socket, :index)}
     />
   </.modal>
@@ -35,13 +36,22 @@
         <td><%= trip.price %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.trip_show_path(@socket, :show, trip) %></span>
-          <span><%= live_patch "Edit", to: Routes.trip_index_path(@socket, :edit, trip) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: trip.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show", to: Routes.trip_show_path(@socket, :show, trip)) %>
+          </span>
+          <span><%= live_patch("Edit", to: Routes.trip_index_path(@socket, :edit, trip)) %></span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: trip.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Trip", to: Routes.trip_index_path(@socket, :new) %></span>
+<span><%= live_patch("New Trip", to: Routes.trip_index_path(@socket, :new)) %></span>

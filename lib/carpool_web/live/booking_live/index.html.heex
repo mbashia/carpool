@@ -8,6 +8,7 @@
       title={@page_title}
       action={@live_action}
       booking={@booking}
+      user = {@user}
       return_to={Routes.booking_index_path(@socket, :index)}
     />
   </.modal>
@@ -31,13 +32,24 @@
         <td><%= booking.notes %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.booking_show_path(@socket, :show, booking) %></span>
-          <span><%= live_patch "Edit", to: Routes.booking_index_path(@socket, :edit, booking) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: booking.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show", to: Routes.booking_show_path(@socket, :show, booking)) %>
+          </span>
+          <span>
+            <%= live_patch("Edit", to: Routes.booking_index_path(@socket, :edit, booking)) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: booking.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Booking", to: Routes.booking_index_path(@socket, :new) %></span>
+<span><%= live_patch("New Booking", to: Routes.booking_index_path(@socket, :new)) %></span>

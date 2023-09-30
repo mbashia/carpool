@@ -3,10 +3,16 @@ defmodule CarpoolWeb.GroupLive.Index do
 
   alias Carpool.Groups
   alias Carpool.Groups.Group
+  alias Carpool.Accounts
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :groups, list_groups())}
+  def mount(_params, session, socket) do
+    user = Accounts.get_user_by_session_token(session["user_token"])
+
+    {:ok,
+     socket
+     |> assign(:groups, list_groups())
+     |> assign(:user, user)}
   end
 
   @impl true

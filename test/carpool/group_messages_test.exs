@@ -23,7 +23,9 @@ defmodule Carpool.Group_messagesTest do
     test "create_group_message/1 with valid data creates a group_message" do
       valid_attrs = %{text: "some text"}
 
-      assert {:ok, %Group_message{} = group_message} = Group_messages.create_group_message(valid_attrs)
+      assert {:ok, %Group_message{} = group_message} =
+               Group_messages.create_group_message(valid_attrs)
+
       assert group_message.text == "some text"
     end
 
@@ -35,20 +37,28 @@ defmodule Carpool.Group_messagesTest do
       group_message = group_message_fixture()
       update_attrs = %{text: "some updated text"}
 
-      assert {:ok, %Group_message{} = group_message} = Group_messages.update_group_message(group_message, update_attrs)
+      assert {:ok, %Group_message{} = group_message} =
+               Group_messages.update_group_message(group_message, update_attrs)
+
       assert group_message.text == "some updated text"
     end
 
     test "update_group_message/2 with invalid data returns error changeset" do
       group_message = group_message_fixture()
-      assert {:error, %Ecto.Changeset{}} = Group_messages.update_group_message(group_message, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Group_messages.update_group_message(group_message, @invalid_attrs)
+
       assert group_message == Group_messages.get_group_message!(group_message.id)
     end
 
     test "delete_group_message/1 deletes the group_message" do
       group_message = group_message_fixture()
       assert {:ok, %Group_message{}} = Group_messages.delete_group_message(group_message)
-      assert_raise Ecto.NoResultsError, fn -> Group_messages.get_group_message!(group_message.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Group_messages.get_group_message!(group_message.id)
+      end
     end
 
     test "change_group_message/1 returns a group_message changeset" do

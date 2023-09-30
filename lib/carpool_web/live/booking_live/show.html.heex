@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Status:</strong>
     <%= @booking.status %>
@@ -29,8 +28,9 @@
     <strong>Notes:</strong>
     <%= @booking.notes %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.booking_show_path(@socket, :edit, @booking), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.booking_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.booking_show_path(@socket, :edit, @booking), class: "button") %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.booking_index_path(@socket, :index)) %></span>

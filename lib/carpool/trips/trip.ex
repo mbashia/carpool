@@ -1,6 +1,7 @@
 defmodule Carpool.Trips.Trip do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Carpool.Accounts.User
 
   schema "trips" do
     field :capacity, :string
@@ -8,6 +9,8 @@ defmodule Carpool.Trips.Trip do
     field :notes, :string
     field :price, :string
     field :to, :string
+    belongs_to :user, User, foreign_key: :user_id
+
 
     timestamps()
   end
@@ -15,7 +18,7 @@ defmodule Carpool.Trips.Trip do
   @doc false
   def changeset(trip, attrs) do
     trip
-    |> cast(attrs, [:from, :to, :capacity, :notes, :price])
-    |> validate_required([:from, :to, :capacity, :notes, :price])
+    |> cast(attrs, [:from, :to, :capacity, :notes, :price, :user_id])
+    |> validate_required([:from, :to, :capacity, :notes, :price, :user_id])
   end
 end

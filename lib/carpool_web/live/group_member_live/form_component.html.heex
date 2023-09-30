@@ -7,18 +7,18 @@
     id="group_member-form"
     phx-target={@myself}
     phx-change="validate"
-    phx-submit="save">
-  
-    <%= label f, :user_id %>
-    <%= text_input f, :user_id %>
-    <%= error_tag f, :user_id %>
-  
-    <%= label f, :group_id %>
-    <%= text_input f, :group_id %>
-    <%= error_tag f, :group_id %>
-  
+    phx-submit="save"
+  >
+    <%= label(f, :user_id) %>
+    <%= text_input(f, :user_id) %>
+    <%= error_tag(f, :user_id) %>
+
+    <%= label(f, :group_id) %>
+    <%= text_input(f, :group_id) %>
+    <%= error_tag(f, :group_id) %>
+
     <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
+      <%= submit("Save", phx_disable_with: "Saving...") %>
     </div>
   </.form>
 </div>

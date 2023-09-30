@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>From:</strong>
     <%= @trip.from %>
@@ -39,8 +38,9 @@
     <strong>Price:</strong>
     <%= @trip.price %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.trip_show_path(@socket, :edit, @trip), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.trip_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.trip_show_path(@socket, :edit, @trip), class: "button") %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.trip_index_path(@socket, :index)) %></span>

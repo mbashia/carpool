@@ -41,7 +41,11 @@ defmodule CarpoolWeb.GroupLive.FormComponent do
   end
 
   defp save_group(socket, :new, group_params) do
-    case Groups.create_group(group_params) do
+    new_group_params =
+      group_params
+      |> Map.put("user_id", socket.assigns.user.id)
+
+    case Groups.create_group(new_group_params) do
       {:ok, _group} ->
         {:noreply,
          socket

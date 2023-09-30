@@ -8,8 +8,10 @@ defmodule Carpool.Repo.Migrations.CreateTrips do
       add :capacity, :string
       add :notes, :string
       add :price, :string
+      add :user_id,:integer
 
       timestamps()
     end
+    create index(:trips, [:user_id])
   end
 end

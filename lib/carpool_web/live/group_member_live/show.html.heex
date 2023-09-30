@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>User:</strong>
     <%= @group_member.user_id %>
@@ -24,8 +23,12 @@
     <strong>Group:</strong>
     <%= @group_member.group_id %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.group_member_show_path(@socket, :edit, @group_member), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.group_member_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit",
+    to: Routes.group_member_show_path(@socket, :edit, @group_member),
+    class: "button"
+  ) %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.group_member_index_path(@socket, :index)) %></span>

@@ -41,7 +41,10 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
   end
 
   defp save_booking(socket, :new, booking_params) do
-    case Bookings.create_booking(booking_params) do
+    new_params=
+    booking_params
+    |>Map.put("user_id", socket.assigns.user.id)
+    case Bookings.create_booking(new_params) do
       {:ok, _booking} ->
         {:noreply,
          socket

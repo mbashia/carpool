@@ -70,7 +70,10 @@ defmodule CarpoolWeb.Group_memberLiveTest do
     test "deletes group_member in listing", %{conn: conn, group_member: group_member} do
       {:ok, index_live, _html} = live(conn, Routes.group_member_index_path(conn, :index))
 
-      assert index_live |> element("#group_member-#{group_member.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#group_member-#{group_member.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#group_member-#{group_member.id}")
     end
   end
@@ -79,14 +82,16 @@ defmodule CarpoolWeb.Group_memberLiveTest do
     setup [:create_group_member]
 
     test "displays group_member", %{conn: conn, group_member: group_member} do
-      {:ok, _show_live, html} = live(conn, Routes.group_member_show_path(conn, :show, group_member))
+      {:ok, _show_live, html} =
+        live(conn, Routes.group_member_show_path(conn, :show, group_member))
 
       assert html =~ "Show Group member"
       assert html =~ group_member.group_id
     end
 
     test "updates group_member within modal", %{conn: conn, group_member: group_member} do
-      {:ok, show_live, _html} = live(conn, Routes.group_member_show_path(conn, :show, group_member))
+      {:ok, show_live, _html} =
+        live(conn, Routes.group_member_show_path(conn, :show, group_member))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Group member"

@@ -167,7 +167,9 @@ Hooks.MapBox = {
           },
           {
             location: {
-              lat: Number(waypoint.lastElementChild.previousElementSibling.innerHTML),
+              lat: Number(
+                waypoint.lastElementChild.previousElementSibling.innerHTML
+              ),
               lng: Number(waypoint.lastElementChild.innerHTML),
             },
             stopover: true,
@@ -258,9 +260,7 @@ Hooks.MapBox = {
         waypointArray.push(
           {
             location: {
-              lat: Number(
-                waypoint.lastElementChild.previousElementSibling.innerHTML
-              ),
+              lat: Number(waypoint.firstElementChild.innerHTML),
               lng: Number(
                 waypoint.firstElementChild.nextElementSibling.innerHTML
               ),
@@ -269,7 +269,9 @@ Hooks.MapBox = {
           },
           {
             location: {
-              lat: Number(waypoint.lastElementChild.innerHTML),
+              lat: Number(
+                waypoint.lastElementChild.previousElementSibling.innerHTML
+              ),
               lng: Number(waypoint.lastElementChild.innerHTML),
             },
             stopover: true,

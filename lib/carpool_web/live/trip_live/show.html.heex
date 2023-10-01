@@ -53,9 +53,15 @@
 <div class="hidden" id="origin_longitude">
   <%= @trip.longitude_to %>
 </div>
-s
+
+<%= live_redirect to: Routes.trip_show_path(@socket , :addbooking , @trip) do %>
+<p class="bg-red-500 p-2">
+  Add  A Booking
+  </p>
+<% end %>
+
 <span><%= live_redirect("Back", to: Routes.trip_index_path(@socket, :index)) %></span>
-<div>
+<div class="hidden">
   <%= for booking <- @trip.bookings do %>
     <div class="waypoints">
       <p class="waypoint_latitude_to">

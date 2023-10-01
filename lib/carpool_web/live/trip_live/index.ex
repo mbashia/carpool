@@ -4,6 +4,8 @@ defmodule CarpoolWeb.TripLive.Index do
   alias Carpool.Trips
   alias Carpool.Trips.Trip
   alias Carpool.Accounts
+  alias Carpool.Bookings
+  alias Carpool.Bookings.Booking
 
   @impl true
   def mount(_params, session, socket) do

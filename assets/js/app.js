@@ -186,6 +186,61 @@ Hooks.MapBox = {
     window.initMap = initMap;
   },
 };
+
+Hooks.Location = {
+  mounted() {
+    const booking_input1 = document.getElementById("booking_input1");
+
+    const booking_latitude_to_input = document.getElementById(
+      "booking_latitude_to_input"
+    );
+    const booking_longitude_to_input = document.getElementById(
+      "booking_longitude_to_input"
+    );
+
+    const options = {
+      fields: ["address_components", "geometry", "icon", "name"],
+      componentRestrictions: { country: "ke" },
+    };
+
+    const autocomplete1 = new google.maps.places.Autocomplete(
+      booking_input1,
+      options
+    );
+    autocomplete1.addListener("place_changed", () => {
+      const place1 = autocomplete1.getPlace();
+      console.log(place1.geometry.location.lat());
+      booking_latitude_to_input = place1.geometry.location.lat();
+      booking_longitude_to_input = place1.geometry.location.lng();
+    });
+  },
+  updated() {
+    const booking_input1 = document.getElementById("booking_input1");
+
+    const booking_latitude_to_input = document.getElementById(
+      "booking_latitude_to_input"
+    );
+    const booking_longitude_to_input = document.getElementById(
+      "booking_longitude_to_input"
+    );
+
+    const options = {
+      fields: ["address_components", "geometry", "icon", "name"],
+      componentRestrictions: { country: "ke" },
+    };
+
+    const autocomplete1 = new google.maps.places.Autocomplete(
+      booking_input1,
+      options
+    );
+    autocomplete1.addListener("place_changed", () => {
+      const place1 = autocomplete1.getPlace();
+      console.log(place1.geometry.location.lat());
+      booking_latitude_to_input = place1.geometry.location.lat();
+      booking_longitude_to_input = place1.geometry.location.lng();
+    });
+  },
+};
 let liveSocket = new LiveSocket("/live", Socket, {
   hooks: Hooks,
   params: { _csrf_token: csrfToken },

@@ -8,7 +8,7 @@ defmodule Carpool.Bookings.Booking do
     field :notes, :string
     field :status, :string
     belongs_to :user, User, foreign_key: :user_id
-
+    belongs_to :trip, Trip, foreign_key: :trip_id
 
     timestamps()
   end
@@ -16,7 +16,7 @@ defmodule Carpool.Bookings.Booking do
   @doc false
   def changeset(booking, attrs) do
     booking
-    |> cast(attrs, [:status, :location, :notes,:user_id])
-    |> validate_required([:status, :location, :notes,:user_id])
+    |> cast(attrs, [:status, :location, :notes, :user_id, :trip_id])
+    |> validate_required([:status, :location, :notes, :user_id, :trip_id])
   end
 end

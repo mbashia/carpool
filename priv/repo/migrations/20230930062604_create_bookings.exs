@@ -7,9 +7,11 @@ defmodule Carpool.Repo.Migrations.CreateBookings do
       add :location, :string
       add :notes, :string
       add :user_id, :integer
+      add :trip_id, :integer
 
       timestamps()
     end
-    create index(:bookings, [:user_id])
+
+    create index(:bookings, [:user_id, :trip_id])
   end
 end

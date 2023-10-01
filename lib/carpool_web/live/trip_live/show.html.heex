@@ -1,13 +1,13 @@
-<h1>Show Trip</h1>
-
-<%= if @live_action in [:edit] do %>
+<%= if @live_action in [:addbooking] do %>
   <.modal return_to={Routes.trip_show_path(@socket, :show, @trip)}>
     <.live_component
-      module={CarpoolWeb.TripLive.FormComponent}
-      id={@trip.id}
+      module={CarpoolWeb.BookingLive.FormComponent}
+      id={@booking.id || :new}
       title={@page_title}
       action={@live_action}
+      booking={@booking}
       trip={@trip}
+      user={@user}
       return_to={Routes.trip_show_path(@socket, :show, @trip)}
     />
   </.modal>
@@ -39,8 +39,9 @@
     <%= @trip.price %>
   </li>
 </ul>
-
-<span>
-  <%= live_patch("Edit", to: Routes.trip_show_path(@socket, :edit, @trip), class: "button") %>
-</span> |
+|
 <span><%= live_redirect("Back", to: Routes.trip_index_path(@socket, :index)) %></span>
+
+<div class="bg-black py-8">
+  <div phx-hook="MapBox" class="h-[50vh]  mx-auto  z-0 w-[80%]" id="mapbox"></div>
+</div>

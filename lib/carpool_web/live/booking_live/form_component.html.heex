@@ -8,13 +8,20 @@
     phx-target={@myself}
     phx-change="validate"
     phx-submit="save"
+    phx-hook="Location"
+    id="location"
   >
+    <%= hidden_input(f, :booking_latitude_to_input, id: "booking_latitude_to_input") %>
+    <%= hidden_input(f, :booking_longitude_to_input, id: "booking_longitude_to_input") %>
+    <%= hidden_input(f, :booking_latitude_from_input, id: "booking_latitude_to_input") %>
+    <%= hidden_input(f, :booking_longitude_from_input, id: "booking_longitude_from_input") %>
+    <%= hidden_input(f, :trip_id, value: @trip.id) %>
     <%= label(f, :status) %>
     <%= text_input(f, :status) %>
     <%= error_tag(f, :status) %>
 
     <%= label(f, :location) %>
-    <%= text_input(f, :location) %>
+    <%= text_input(f, :location, id: "booking_input1") %>
     <%= error_tag(f, :location) %>
 
     <%= label(f, :notes) %>

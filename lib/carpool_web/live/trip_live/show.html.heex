@@ -39,9 +39,43 @@
     <%= @trip.price %>
   </li>
 </ul>
-|
-<span><%= live_redirect("Back", to: Routes.trip_index_path(@socket, :index)) %></span>
 
-<div class="bg-black py-8">
+<div class="hidden" id="destination_latitude">
+  <%= @trip.latitude_to %>
+</div>
+<div class="hidden" id="destination_longitude">
+  <%= @trip.longitude_from %>
+</div>
+
+<div class="hidden" id="origin_latitude">
+  <%= @trip.latitude_from %>
+</div>
+<div class="hidden" id="origin_longitude">
+  <%= @trip.longitude_to %>
+</div>
+s
+<span><%= live_redirect("Back", to: Routes.trip_index_path(@socket, :index)) %></span>
+<div>
+  <%= for booking <- @trip.bookings do %>
+    <div class="waypoints">
+      <p class="waypoint_latitude_to">
+        <%= booking.booking_latitude_to %>
+      </p>
+      <p class="waypoint_longitude_to">
+        <%= booking.booking_longitude_from %>
+      </p>
+      <p class="waypoint_latitude_from">
+        <%= booking.booking_latitude_from %>
+      </p>
+
+      <p class="waypoint_longitude_from">
+        <%= booking.booking_longitude_to %>
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<div class="py-8">
   <div phx-hook="MapBox" class="h-[50vh]  mx-auto  z-0 w-[80%]" id="mapbox"></div>
+  <div id="sidebar" />
 </div>

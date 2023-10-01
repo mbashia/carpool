@@ -15,6 +15,7 @@ defmodule Carpool.Trips.Trip do
     field :longitude_to, :float
     field :to, :string
     belongs_to :user, User, foreign_key: :user_id
+    has_many :bookings, Carpool.Bookings.Booking
 
     timestamps()
   end

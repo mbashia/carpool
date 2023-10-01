@@ -103,33 +103,90 @@ Hooks.MapBox = {
     function initMap() {
       const directionsRenderer = new google.maps.DirectionsRenderer();
       const directionsService = new google.maps.DirectionsService();
+      const origin_latitude = Number(
+        document.getElementById("origin_latitude").innerHTML
+      );
+      const origin_longitude = Number(
+        document.getElementById("origin_longitude").innerHTML
+      );
+
+      const destination_latitude = Number(
+        document.getElementById("destination_latitude").innerHTML
+      );
+      const destination_longitude = Number(
+        document.getElementById("destination_longitude").innerHTML
+      );
+
       const map = new google.maps.Map(document.getElementById("mapbox"), {
         zoom: 14,
-        center: { lat: 37.77, lng: -122.447 },
+        center: { lat: origin_latitude, lng: origin_longitude },
       });
 
       directionsRenderer.setMap(map);
+      directionsRenderer.setPanel(document.getElementById("sidebar"));
+
       calculateAndDisplayRoute(directionsService, directionsRenderer);
     }
 
     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+      const origin_latitude = Number(
+        document.getElementById("origin_latitude").innerHTML
+      );
+      const origin_longitude = Number(
+        document.getElementById("origin_longitude").innerHTML
+      );
+
+      const destination_latitude = Number(
+        document.getElementById("destination_latitude").innerHTML
+      );
+      const destination_longitude = Number(
+        document.getElementById("destination_longitude").innerHTML
+      );
+
       // Set the travel mode to "DRIVING" explicitly
       const selectedMode = "DRIVING";
+      const all_waypoints = document.querySelectorAll(".waypoints");
+
+      all_waypoints.forEach((waypoint) => {
+        console.log(waypoint.firstElementChild.nextElementSibling.innerHTML);
+        console.log(waypoint.lastElementChild.previousElementSibling.innerHTML);
+      });
+
+      let waypointArray = [];
+
+      all_waypoints.forEach((waypoint) => {
+        waypointArray.push(
+          {
+            location: {
+              lat: Number(waypoint.firstElementChild.innerHTML),
+              lng: Number(
+                waypoint.firstElementChild.nextElementSibling.innerHTML
+              ),
+            },
+            stopover: true,
+          },
+          {
+            location: {
+              lat: Number(waypoint.lastElementChild.previousElementSibling.innerHTML),
+              lng: Number(waypoint.lastElementChild.innerHTML),
+            },
+            stopover: true,
+          }
+        );
+      });
 
       directionsService
         .route({
-          origin: { lat: 37.77, lng: -122.447 },
-          destination: { lat: 37.768, lng: -122.511 },
-          waypoints: [
-            {
-              location: { lat: 37.79, lng: -122.41 },
-              stopover: true,
-            },
-            {
-              location: { lat: 37.77, lng: -122.41 },
-              stopover: true,
-            },
-          ],
+          origin: {
+            lat: origin_latitude,
+            lng: origin_longitude,
+          },
+          destination: {
+            lat: destination_latitude,
+            lng: destination_longitude,
+          },
+          waypoints: waypointArray,
+
           travelMode: google.maps.TravelMode[selectedMode],
         })
         .then((response) => {
@@ -146,33 +203,92 @@ Hooks.MapBox = {
     function initMap() {
       const directionsRenderer = new google.maps.DirectionsRenderer();
       const directionsService = new google.maps.DirectionsService();
+      const origin_latitude = Number(
+        document.getElementById("origin_latitude").innerHTML
+      );
+      const origin_longitude = Number(
+        document.getElementById("origin_longitude").innerHTML
+      );
+
+      const destination_latitude = Number(
+        document.getElementById("destination_latitude").innerHTML
+      );
+      const destination_longitude = Number(
+        document.getElementById("destination_longitude").innerHTML
+      );
+
       const map = new google.maps.Map(document.getElementById("mapbox"), {
         zoom: 14,
-        center: { lat: 37.77, lng: -122.447 },
+        center: { lat: origin_latitude, lng: origin_longitude },
       });
 
       directionsRenderer.setMap(map);
+      directionsRenderer.setPanel(document.getElementById("sidebar"));
+
       calculateAndDisplayRoute(directionsService, directionsRenderer);
     }
 
     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+      const origin_latitude = Number(
+        document.getElementById("origin_latitude").innerHTML
+      );
+      const origin_longitude = Number(
+        document.getElementById("origin_longitude").innerHTML
+      );
+
+      const destination_latitude = Number(
+        document.getElementById("destination_latitude").innerHTML
+      );
+      const destination_longitude = Number(
+        document.getElementById("destination_longitude").innerHTML
+      );
+
       // Set the travel mode to "DRIVING" explicitly
       const selectedMode = "DRIVING";
+      const all_waypoints = document.querySelectorAll(".waypoints");
+
+      all_waypoints.forEach((waypoint) => {
+        console.log(waypoint.firstElementChild.nextElementSibling.innerHTML);
+        console.log(waypoint.lastElementChild.previousElementSibling.innerHTML);
+      });
+
+      let waypointArray = [];
+
+      all_waypoints.forEach((waypoint) => {
+        waypointArray.push(
+          {
+            location: {
+              lat: Number(
+                waypoint.lastElementChild.previousElementSibling.innerHTML
+              ),
+              lng: Number(
+                waypoint.firstElementChild.nextElementSibling.innerHTML
+              ),
+            },
+            stopover: true,
+          },
+          {
+            location: {
+              lat: Number(waypoint.lastElementChild.innerHTML),
+              lng: Number(waypoint.lastElementChild.innerHTML),
+            },
+            stopover: true,
+          }
+        );
+      });
 
       directionsService
         .route({
-          origin: { lat: 37.77, lng: -122.447 },
-          destination: { lat: 37.768, lng: -122.511 },
-          waypoints: [
-            {
-              location: { lat: 37.79, lng: -122.41 },
-              stopover: true,
-            },
-            {
-              location: { lat: 37.77, lng: -122.41 },
-              stopover: true,
-            },
-          ],
+          origin: {
+            lat: origin_latitude,
+            lng: origin_longitude,
+          },
+          destination: {
+            lat: destination_latitude,
+            lng: destination_longitude,
+          },
+          waypoints: waypointArray,
+
           travelMode: google.maps.TravelMode[selectedMode],
         })
         .then((response) => {
@@ -183,7 +299,7 @@ Hooks.MapBox = {
         );
     }
 
-    window.initMap = initMap;
+    initMap();
   },
 };
 

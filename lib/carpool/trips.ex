@@ -35,7 +35,7 @@ defmodule Carpool.Trips do
       ** (Ecto.NoResultsError)
 
   """
-  def get_trip!(id), do: Repo.get!(Trip, id)
+  def get_trip!(id), do: Repo.get!(Trip, id) |> Repo.preload(:bookings)
 
   @doc """
   Creates a trip.

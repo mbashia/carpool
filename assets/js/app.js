@@ -189,58 +189,79 @@ Hooks.MapBox = {
 
 Hooks.Location = {
   mounted() {
-    const booking_input1 = document.getElementById("booking_input1");
-
-    const booking_latitude_to_input = document.getElementById(
+    const input1 = document.getElementById("booking_input1");
+    const input2 = document.getElementById("booking_input2");
+    const latitude_from_input = document.getElementById(
+      "booking_latitude_from_input"
+    );
+    const longitude_from_input = document.getElementById(
+      "booking_longitude_from_input"
+    );
+    const latitude_to_input = document.getElementById(
       "booking_latitude_to_input"
     );
-    const booking_longitude_to_input = document.getElementById(
+    const longitude_to_input = document.getElementById(
       "booking_longitude_to_input"
     );
-
     const options = {
       fields: ["address_components", "geometry", "icon", "name"],
       componentRestrictions: { country: "ke" },
     };
 
-    const autocomplete1 = new google.maps.places.Autocomplete(
-      booking_input1,
-      options
-    );
+    const autocomplete1 = new google.maps.places.Autocomplete(input1, options);
     autocomplete1.addListener("place_changed", () => {
       const place1 = autocomplete1.getPlace();
       console.log(place1.geometry.location.lat());
-      booking_latitude_to_input = place1.geometry.location.lat();
-      booking_longitude_to_input = place1.geometry.location.lng();
+      latitude_from_input.value = place1.geometry.location.lat();
+      longitude_from_input.value = place1.geometry.location.lng();
+    });
+
+    const autocomplete2 = new google.maps.places.Autocomplete(input2, options);
+    autocomplete2.addListener("place_changed", () => {
+      const place2 = autocomplete2.getPlace();
+      console.log(place2.geometry.location.lat());
+      latitude_to_input.value = place2.geometry.location.lat();
+      longitude_to_input.value = place2.geometry.location.lng();
     });
   },
   updated() {
-    const booking_input1 = document.getElementById("booking_input1");
-
-    const booking_latitude_to_input = document.getElementById(
+    const input1 = document.getElementById("booking_input1");
+    const input2 = document.getElementById("booking_input2");
+    const latitude_from_input = document.getElementById(
+      "booking_latitude_from_input"
+    );
+    const longitude_from_input = document.getElementById(
+      "booking_longitude_from_input"
+    );
+    const latitude_to_input = document.getElementById(
       "booking_latitude_to_input"
     );
-    const booking_longitude_to_input = document.getElementById(
+    const longitude_to_input = document.getElementById(
       "booking_longitude_to_input"
     );
-
     const options = {
       fields: ["address_components", "geometry", "icon", "name"],
       componentRestrictions: { country: "ke" },
     };
 
-    const autocomplete1 = new google.maps.places.Autocomplete(
-      booking_input1,
-      options
-    );
+    const autocomplete1 = new google.maps.places.Autocomplete(input1, options);
     autocomplete1.addListener("place_changed", () => {
       const place1 = autocomplete1.getPlace();
       console.log(place1.geometry.location.lat());
-      booking_latitude_to_input = place1.geometry.location.lat();
-      booking_longitude_to_input = place1.geometry.location.lng();
+      latitude_from_input.value = place1.geometry.location.lat();
+      longitude_from_input.value = place1.geometry.location.lng();
+    });
+
+    const autocomplete2 = new google.maps.places.Autocomplete(input2, options);
+    autocomplete2.addListener("place_changed", () => {
+      const place2 = autocomplete2.getPlace();
+      console.log(place2.geometry.location.lat());
+      latitude_to_input.value = place2.geometry.location.lat();
+      longitude_to_input.value = place2.geometry.location.lng();
     });
   },
 };
+
 let liveSocket = new LiveSocket("/live", Socket, {
   hooks: Hooks,
   params: { _csrf_token: csrfToken },

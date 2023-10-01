@@ -4,7 +4,12 @@ defmodule Carpool.Bookings.Booking do
   alias Carpool.Accounts.User
 
   schema "bookings" do
-    field :location, :string
+    field :location_to, :string
+    field :location_from, :string
+    field :booking_latitude_to, :float
+    field :booking_longitude_to, :float
+    field :booking_latitude_from, :float
+    field :booking_longitude_from, :float
     field :notes, :string
     field :status, :string
     belongs_to :user, User, foreign_key: :user_id
@@ -16,7 +21,29 @@ defmodule Carpool.Bookings.Booking do
   @doc false
   def changeset(booking, attrs) do
     booking
-    |> cast(attrs, [:status, :location, :notes, :user_id, :trip_id])
-    |> validate_required([:status, :location, :notes, :user_id, :trip_id])
+    |> cast(attrs, [
+      :status,
+      :location_from,
+      :location_to,
+      :notes,
+      :user_id,
+      :trip_id,
+      :booking_latitude_to,
+      :booking_longitude_to,
+      :booking_latitude_from,
+      :booking_longitude_from
+    ])
+    |> validate_required([
+      :status,
+      :location_from,
+      :location_to,
+      :notes,
+      :user_id,
+      :trip_id,
+      :booking_latitude_to,
+      :booking_longitude_to,
+      :booking_latitude_from,
+      :booking_longitude_from
+    ])
   end
 end

@@ -35,6 +35,16 @@
     <%= text_input(f, :price) %>
     <%= error_tag(f, :price) %>
 
+    <%= label(f, :departure_time) %>
+    <%= time_select(f, :departure_time) %>
+    <%= error_tag(f, :departure_time) %>
+
+
+<%= label(f, :return_time) %>
+    <%= time_select(f, :return_time) %>
+    <%= error_tag(f, :return_time) %>
+
+
     <div>
       <%= submit("Save", phx_disable_with: "Saving...") %>
     </div>

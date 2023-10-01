@@ -13,6 +13,8 @@ defmodule Carpool.Repo.Migrations.CreateTrips do
       add :latitude_to, :float
       add :longitude_from, :float
       add :latitude_from, :float
+      add :departure_time, :time
+      add :return_time, :time
 
       timestamps()
     end

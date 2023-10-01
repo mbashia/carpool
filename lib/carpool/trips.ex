@@ -38,7 +38,7 @@ defmodule Carpool.Trips do
   def get_trip!(id), do: Repo.get!(Trip, id) |> Repo.preload(:bookings)
 
   def search(search) do
-    query = from t in Trip, where: fragment("? LIKE ?", t.from, ^"%#{search}%")
+    query = from t in Trip, where: fragment("? LIKE ?", t.from, ^"%#{search}%" )or fragment("? LIKE ?", t.to, ^"%#{search}%" )
     Repo.all(query)
   end
 

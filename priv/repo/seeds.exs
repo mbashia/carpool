@@ -9,8 +9,6 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias Carpool.Repo
-alias Carpool.Accounts.User
 alias Carpool.Accounts
 
 user = %{

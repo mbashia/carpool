@@ -11,6 +11,9 @@ defmodule Carpool.Trips.Trip do
     field :latitude_from, :float
     field :latitude_to, :float
     field :longitude_from, :float
+    field :departure_time, :time
+    field :return_time, :time
+
 
     field :longitude_to, :float
     field :to, :string
@@ -33,7 +36,9 @@ defmodule Carpool.Trips.Trip do
       :longitude_to,
       :latitude_to,
       :longitude_from,
-      :latitude_from
+      :latitude_from,
+      :departure_time,
+      :return_time
     ])
     |> validate_required([
       :from,
@@ -45,7 +50,9 @@ defmodule Carpool.Trips.Trip do
       :longitude_to,
       :latitude_to,
       :longitude_from,
-      :latitude_from
+      :latitude_from,
+      :departure_time,
+      :return_time
     ])
   end
 end

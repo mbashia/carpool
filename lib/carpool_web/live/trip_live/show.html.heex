@@ -13,6 +13,21 @@
   </.modal>
 <% end %>
 
+<%= if @live_action in [:chat] do %>
+  <.modal return_to={Routes.trip_show_path(@socket, :show, @trip)}>
+    <.live_component
+      module={CarpoolWeb.TripLive.ChatComponent}
+      id={@trip.id || :new}
+      title={@page_title}
+      action={@live_action}
+      receiver_id={@receiver_id}
+      return_to={Routes.trip_show_path(@socket, :show, @trip)}
+      chat_changeset = {@chat_changeset}
+      user= {@user}
+    />
+  </.modal>
+<% end %>
+
 <ul>
   <li>
     <strong>From:</strong>
@@ -53,10 +68,31 @@
 <div class="hidden" id="origin_longitude">
   <%= @trip.longitude_to %>
 </div>
+<p class="text-bold text-2xl m-4">this are the bookings for this trip</p>
+<div class="flex flex-col">
+  <%= for booking <- @bookings do %>
+    <div class="flex gap-4 m-4">
+      <span><%= booking.user.firstname %></span>
+      <span><%= booking.user.lastname %></span>
 
+      <span><%= booking.location_to %></span>
+      <span><%= booking.location_from %></span>
+
+      <span><%= booking.inserted_at %></span>
+
+      <%= if @user.id == @trip.user_id do %>
+        <span class="text-blue">
+          <%= live_redirect("chat with #{booking.user.firstname} #{booking.user.lastname}",
+            to: Routes.trip_show_path(@socket, :chat,@trip, booking.user.id)
+          ) %>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 <%= live_redirect to: Routes.trip_show_path(@socket , :addbooking , @trip) do %>
-<p class="bg-red-500 p-2">
-  Add  A Booking
+  <p class="bg-red-500 p-2">
+    Add  A Booking
   </p>
 <% end %>
 

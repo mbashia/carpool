@@ -21,6 +21,11 @@ defmodule Carpool.Bookings do
     Repo.all(Booking)
   end
 
+  def get_booking_by_trip_id(id) do
+    Repo.all(from b in Booking, where: b.trip_id == ^id and b.status == "inactive")
+    |> Repo.preload(:user)
+  end
+
   @doc """
   Gets a single booking.
 

@@ -9,6 +9,7 @@ defmodule Carpool.Repo.Migrations.CreateMessages do
 
       timestamps()
     end
+
     create index(:messages, [:sender_id])
   end
 end

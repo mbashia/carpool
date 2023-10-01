@@ -27,5 +27,6 @@
 
 <span>
   <%= live_patch("Edit", to: Routes.group_show_path(@socket, :edit, @group), class: "button") %>
-</span> |
+</span>
+|
 <span><%= live_redirect("Back", to: Routes.group_index_path(@socket, :index)) %></span>

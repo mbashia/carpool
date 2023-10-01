@@ -19,7 +19,7 @@ defmodule Carpool.Accounts.User do
     has_many :group_messages, Group_message
     has_many :trips, Trip
     has_many :bookings, Booking
-    has_many :messages , Message
+    has_many :messages, Message
 
     timestamps()
   end

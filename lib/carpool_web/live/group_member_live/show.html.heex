@@ -30,5 +30,6 @@
     to: Routes.group_member_show_path(@socket, :edit, @group_member),
     class: "button"
   ) %>
-</span> |
+</span>
+|
 <span><%= live_redirect("Back", to: Routes.group_member_index_path(@socket, :index)) %></span>

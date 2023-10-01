@@ -25,5 +25,6 @@
     to: Routes.group_message_show_path(@socket, :edit, @group_message),
     class: "button"
   ) %>
-</span> |
+</span>
+|
 <span><%= live_redirect("Back", to: Routes.group_message_index_path(@socket, :index)) %></span>

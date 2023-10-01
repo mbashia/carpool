@@ -107,6 +107,7 @@ defmodule CarpoolWeb.Router do
 
     live "/trips/:id", TripLive.Show, :show
     live "/trips/:id/addbooking", TripLive.Show, :addbooking
+    live "trips/:id/chat/:user_id", TripLive.Show, :chat
     live "/trips/:id/show/edit", TripLive.Show, :edit
 
     live "/bookings", BookingLive.Index, :index

@@ -12,7 +12,7 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
         <%= error_tag(f, :text) %>
 
         <div>
-          <%= submit("Save", phx_disable_with: "Saving...") %>
+          <%= submit("send", phx_disable_with: "Saving...") %>
         </div>
       </.form>
     </div>
@@ -41,4 +41,3 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
     end
   end
 end
-

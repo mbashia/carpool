@@ -13,6 +13,9 @@
     />
   </.modal>
 <% end %>
+<.form let={f} phx-change="search" for={@changeset}>
+  <%= text_input(f, :search, placeholder: "Search") %>
+</.form>
 
 <table>
   <thead>

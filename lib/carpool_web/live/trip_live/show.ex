@@ -14,15 +14,11 @@ defmodule CarpoolWeb.TripLive.Show do
 
     {:ok,
      socket
-     |> assign(:user, user)
-   }
+     |> assign(:user, user)}
   end
-
 
   @impl true
   def handle_params(params, _, socket) do
-
-
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
@@ -30,11 +26,7 @@ defmodule CarpoolWeb.TripLive.Show do
      |> assign(:trip, Trips.get_trip!(params["id"]))
      |> assign(:bookings, Bookings.get_booking_by_trip_id(params["id"]))
      |> assign(:receiver_id, params["user_id"])
-     |> assign(:chat_changeset, Messages.change_message(%Message{}))
-    }
-
-
-
+     |> assign(:chat_changeset, Messages.change_message(%Message{}))}
   end
 
   defp page_title(:show), do: "Show Trip"

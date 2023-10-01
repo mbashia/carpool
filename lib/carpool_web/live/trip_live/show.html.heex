@@ -22,8 +22,8 @@
       action={@live_action}
       receiver_id={@receiver_id}
       return_to={Routes.trip_show_path(@socket, :show, @trip)}
-      chat_changeset = {@chat_changeset}
-      user= {@user}
+      chat_changeset={@chat_changeset}
+      user={@user}
     />
   </.modal>
 <% end %>
@@ -83,7 +83,7 @@
       <%= if @user.id == @trip.user_id do %>
         <span class="text-blue">
           <%= live_redirect("chat with #{booking.user.firstname} #{booking.user.lastname}",
-            to: Routes.trip_show_path(@socket, :chat,@trip, booking.user.id)
+            to: Routes.trip_show_path(@socket, :chat, @trip, booking.user.id)
           ) %>
         </span>
       <% end %>

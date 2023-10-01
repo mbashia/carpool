@@ -10,11 +10,13 @@ defmodule CarpoolWeb.TripLive.Index do
   @impl true
   def mount(_params, session, socket) do
     user = Accounts.get_user_by_session_token(session["user_token"])
+    changeset = Trips.change_trip(%Trip{})
 
     {:ok,
      socket
      |> assign(:trips, list_trips())
-     |> assign(:user, user)}
+     |> assign(:user, user)
+     |> assign(:changeset, changeset)}
   end
 
   @impl true
@@ -46,6 +48,12 @@ defmodule CarpoolWeb.TripLive.Index do
     {:ok, _} = Trips.delete_trip(trip)
 
     {:noreply, assign(socket, :trips, list_trips())}
+  end
+
+  def handle_event("search", %{"trip" => %{"search" => search_params}}, socket) do
+    {:noreply,
+     socket
+     |> assign(:trips, Trips.search(search_params))}
   end
 
   defp list_trips do

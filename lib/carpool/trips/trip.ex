@@ -14,7 +14,6 @@ defmodule Carpool.Trips.Trip do
     field :departure_time, :time
     field :return_time, :time
 
-
     field :longitude_to, :float
     field :to, :string
     belongs_to :user, User, foreign_key: :user_id

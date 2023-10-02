@@ -1,3 +1,212 @@
 <div>
-  Hey
+  <div class="w-[100%]  bg-[#3C3E3E] p-4">
+    <div class="w-[90%] mx-auto uppercase flex justify-between text-white ">
+      <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+        <p>Home</p>
+        <i />
+      </div>
+      <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+        <p>About</p>
+        <i />
+      </div>
+      <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+        <p>How it works</p>
+        <i />
+      </div>
+      <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+        <p>Contact Us</p>
+        <i />
+      </div>
+      <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+        <%= live_redirect("Trips",
+          to: Routes.trip_index_path(@socket, :index)
+          
+            
+        ) %>
+      </div>
+
+      <%= if @user_signed_in == true do %>
+            <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+        <%= link("Log out",
+          to: Routes.user_session_path(@socket, :delete),
+          method: :delete
+         
+        ) %>
+      </div>
+      <% else %>
+            <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+        <%= live_redirect("Register",
+          to: Routes.user_registration_path(@socket, :new)
+         
+        ) %>
+        </div>
+              <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+        <%= live_redirect("Log in",
+          to: Routes.user_session_path(@socket, :new)
+         
+        ) %>
+        </div>
+
+      <% end %>
+      
+
+      <div class="flex cursor-pointer bg-[#FECC18] text-[#3C3E3E] rounded-3xl p-4 transition-all duration-500 ease-in-out  items-center gap-1">
+        <p>Get Started</p>
+        <i />
+      </div>
+    </div>
+  </div>
+  <div class="flex bg-[#FECC18] justify-between w-[100%] gap-2 "></div>
+  <div class="flex bg-[#FECC18] justify-between w-[100%] gap-2"></div>
+  <div class="bg-[#FECC18] h-[90vh] w-[100%]">
+    <div class="flex justify-between items-center h-[100%] mx-auto w-[90%]">
+      <div class="w-[45%] flex flex-col gap-4">
+        <h3 class="text-[#3C3E3E] font-semibold text-4xl">
+          Earn . Connect . Contribute to Society
+        </h3>
+        <p>Partner with us to drive your own livelihood and more</p>
+        <div class="w-[100%">
+          <button class="bg-[#3C3E3E] p-4 rounded-3xl uppercase text-white">
+            Sign Up Now
+          </button>
+        </div>
+      </div>
+      <div class="w-[45%] flex flex-col justify-center items-center h-[100%] gap-4">
+        <img src="images/taxi.png" />
+      </div>
+    </div>
+  </div>
+  <div class="h-[70vh] flex flex-col gap-8 justify-center items-center">
+    <div class="flex flex-col justify-center items-center gap-2">
+      <p class="text-[#3B3B3B] text-3xl">How it Works</p>
+      <div class=" mx-auto flex gap-0 flex-col">
+        <div class="flex   justify-between w-[100%] gap-2">
+          <p class="w-[8px] h-[8px] bg-[#FECC18]"></p>
+        </div>
+        <div class="flex   justify-between w-[100%] gap-2">
+          <p class="w-[8px] h-[8px] bg-[#FECC18]"></p>
+        </div>
+      </div>
+    </div>
+    <div class="w-[90%] flex justify-between items-center mx-auto">
+      <div class="w-[23%] flex flex-col justify-center items-center gap-3">
+        <div class="w-[100px] h-[100px] flex flex-col justify-center items-center bg-[#FEFBF0] border-[1px] border-[#CDCAC2] rounded-full ">
+          p
+        </div>
+
+        <p class="text-2xl font-bold">Book in just 1 tab</p>
+        <p class="text-[#929292] text-center ">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+        </p>
+      </div>
+      <div class="w-[23%] flex flex-col justify-center items-center gap-3">
+        <div class="w-[100px] h-[100px] flex flex-col justify-center items-center bg-[#FEFBF0] border-[1px] border-[#CDCAC2] rounded-full ">
+          p
+        </div>
+
+        <p class="text-2xl font-bold">Book in just 1 tab</p>
+        <p class="text-[#929292] text-center ">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+        </p>
+      </div>
+      <div class="w-[23%] flex flex-col justify-center items-center gap-3">
+        <div class="w-[100px] h-[100px] flex flex-col justify-center items-center bg-[#FEFBF0] border-[1px] border-[#CDCAC2] rounded-full ">
+          p
+        </div>
+
+        <p class="text-2xl font-bold">Book in just 1 tab</p>
+        <p class="text-[#929292] text-center ">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+        </p>
+      </div>
+      <div class="w-[23%] flex flex-col justify-center items-center gap-3">
+        <div class="w-[100px] h-[100px] flex flex-col justify-center items-center bg-[#FEFBF0] border-[1px] border-[#CDCAC2] rounded-full ">
+          p
+        </div>
+
+        <p class="text-2xl font-bold">Book in just 1 tab</p>
+        <p class="text-[#929292] text-center ">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-[100vh] flex flex-col  justify-center items-center">
+    <div class="w-[90%] flex justify-between items-center mx-auto">
+      <div class="flex w-[47%] flex-col gap-2">
+        <p class="text-[#3B3B3B] text-2xl font-semibold">
+          Trusted Carpooling Service Around Kilimani
+        </p>
+        <div class="flex gap-0 flex-col  items-start">
+          <div class="flex ml-4   justify-between w-[20%] gap-2">
+            <p class="w-[8px]  h-[8px] bg-[#FECC18]"></p>
+          </div>
+          <div class="flex   justify-between w-[30%] gap-2">
+            <p class="w-[8px] h-[8px] bg-[#FECC18]"></p>
+          </div>
+        </div>
+        <p class="text-[#777777]">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget
+          augue nec massa volutpat aliquam fringilla non.
+        </p>
+        <div class="flex gap-2 flex-col">
+          <div class="gap-2 items-center flex">
+            <p class="bg-[#777777] text-white h-[20px] flex justify-center p-2 text-xs items-center w-[20px] rounded-full ">
+              j
+            </p>
+            <p>Cras justo</p>
+          </div>
+          <div class="gap-2 items-center flex">
+            <p class="bg-[#777777] text-white h-[20px] flex justify-center p-2 text-xs items-center w-[20px] rounded-full ">
+              j
+            </p>
+            <p>Cras justo</p>
+          </div>
+          <div class="gap-2 items-center flex">
+            <p class="bg-[#777777] text-white h-[20px] flex justify-center p-2 text-xs items-center w-[20px] rounded-full ">
+              j
+            </p>
+            <p>Cras justo</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-[47%] flex flex-col justify-center items-center h-[100%] gap-4">
+        <img src="images/taxi.png" />
+      </div>
+    </div>
+  </div>
+  <div id="contact" class="w-[100%] bg-[#3C3E3E] mt-8 py-8 ">
+    <div class="md:w-[90%] mx-auto flex md:flex-row flex-col gap-4 justify-between text-white text-xl  p-4">
+      <div class="flex flex-col gap-2">
+        <p class="text-[#FFC61C]">Kabarak Express</p>
+        <p class="w-[60%]">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          voluptatum.
+        </p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <p class="text-[#FFC61C]">Quick Links</p>
+        <p>Home</p>
+        <p>How it Works</p>
+        <p>Footer</p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <p class="text-[#FFC61C]">Contact</p>
+        <div class="flex flex-row items-center gap-2">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          <p>0740769596</p>
+        </div>
+        <div class="flex flex-row items-center gap-2">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <p>@kabarakexpress</p>
+        </div>
+        <div class="flex flex-row items-center gap-2">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          <p>kabarakexpress@gmail.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

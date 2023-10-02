@@ -1,41 +1,106 @@
-<h1>Register</h1>
+<div class="h-[100vh] w-[100%] bg-gradient-to-b from-[#37404A]  via-[#7269EF]  to-[#262E35]">
+  <div class="bg-black/50 h-[100vh] py-8 flex justify-center flex-col items-center w-[100%]">
+    <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
+      <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+      <% end %>
 
-<.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
+      <div class="bg-[#262e35]/75 md:h-[600px] flex justify-center  py-8 md:py-0 items-center gap-4 flex-col md:w-[800px]">
+        <%= Heroicons.icon("chat-bubble-oval-left-ellipsis",
+          type: "solid",
+          class: "h-8  text-[#7269EF] transition-all duration-500 ease-in-out rounded-xl w-8"
+        ) %>
+        <p class="text-[#7269EF] text-center text-xl poppins-regular">
+          Register
+        </p>
 
-  <%= label(f, :firstname) %>
-  <%= text_input(f, :firstname, required: true) %>
-  <%= error_tag(f, :firstname) %>
+        <div class="flex  justify-between w-[90%]">
+          <div class="flex flex-col w-[48%]">
+            <%= label(f, :firstname, class: "text-[#eff2f7] poppins-regular") %>
+            <%= text_input(f, :firstname,
+              required: true,
+              class:
+                "w-[100%] h-[45px] bg-[#eff2f7] poppins-regular text-[#37404A] border border-transparent   focus:ring-0 border-none"
+            ) %>
+            <p class="pt-5">
+              <%= error_tag(f, :firstname) %>
+            </p>
+          </div>
 
-  <%= label(f, :lastname) %>
-  <%= text_input(f, :lastname, required: true) %>
-  <%= error_tag(f, :lastname) %>
+          <div class="flex flex-col w-[48%]">
+            <%= label(f, :lastname, class: "text-[#eff2f7] poppins-regular") %>
+            <%= text_input(f, :lastname,
+              required: true,
+              class:
+                "w-[100%] h-[45px] bg-[#eff2f7] poppins-regular text-[#37404A] border border-transparent   focus:ring-0 border-none"
+            ) %>
+            <p class="pt-5">
+              <%= error_tag(f, :lastname) %>
+            </p>
+          </div>
+        </div>
 
-  <%= label(f, :location) %>
-  <%= text_input(f, :location, required: true) %>
-  <%= error_tag(f, :location) %>
+        <div class="flex flex-col md:flex-row justify-between w-[90%]">
+          <div class="flex flex-col md:w-[48%] w-[100%]">
+            <%= label(f, :location, class: "text-[#eff2f7] poppins-regular") %>
+            <%= text_input(f, :location,
+              required: true,
+              class:
+                "w-[100%] h-[45px] bg-[#eff2f7] poppins-regular text-[#37404A] border border-transparent   focus:ring-0 border-none"
+            ) %>
+            <p class="pt-5">
+              <%= error_tag(f, :location) %>
+            </p>
+          </div>
 
-  <%= label(f, :email) %>
+          <div class="flex flex-col  md:w-[48%] w-[100%]">
+            <%= label(f, :photo, class: "text-[#eff2f7] poppins-regular") %>
+            <input type="text" name="username" id="username" placeholder="" />
+            <p class="pt-5"></p>
+          </div>
+        </div>
 
-  <%= email_input(f, :email, required: true) %>
-  <%= error_tag(f, :email) %>
+        <div class="flex justify-between w-[90%]">
+          <div class="flex flex-col w-[48%]">
+            <%= label(f, :email, class: "text-[#eff2f7] poppins-regular") %>
+            <%= email_input(f, :email,
+              required: true,
+              class:
+                "w-[100%] h-[45px] bg-[#eff2f7] poppins-regular text-[#37404A] border border-transparent   focus:ring-0 border-none"
+            ) %>
+            <p class="pt-5">
+              <%= error_tag(f, :email) %>
+            </p>
+          </div>
 
-  <%= label(f, :password) %>
-  <%= password_input(f, :password, required: true) %>
-  <%= error_tag(f, :password) %>
+          <div class="flex flex-col w-[48%]">
+            <%= label(f, :password, class: "text-[#eff2f7] poppins-regular") %>
+            <%= password_input(f, :password,
+              required: true,
+              class:
+                "w-[100%] h-[45px] bg-[#eff2f7] poppins-regular text-[#37404A] border border-transparent   focus:ring-0 border-none"
+            ) %>
+            <p class="pt-5">
+              <%= error_tag(f, :password) %>
+            </p>
+          </div>
+        </div>
+        <div class="flex justify-center items-center">
+          <%= submit("Register",
+            class:
+              "bg-[#7269EF]  px-4 py-2 text-[#eff2f7] text-xl hover:scale-105 transition-all ease-in-out duration-500 poppins-regular cursor-pointer"
+          ) %>
+        </div>
 
-  <div>
-    <%= submit("Register") %>
+        <p class="text-[#eff2f7]">
+          <%= link("Log in", to: Routes.user_session_path(@conn, :new)) %> | <%= link(
+            "Forgot your password?",
+            to: Routes.user_reset_password_path(@conn, :new)
+          ) %>
+        </p>
+      </div>
+    </.form>
   </div>
-</.form>
-
-<p>
-  <%= link("Log in", to: Routes.user_session_path(@conn, :new)) %> | <%= link(
-    "Forgot your password?",
-    to: Routes.user_reset_password_path(@conn, :new)
-  ) %>
-</p>
+</div>

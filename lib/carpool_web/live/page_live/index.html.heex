@@ -20,35 +20,28 @@
       <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
         <%= live_redirect("Trips",
           to: Routes.trip_index_path(@socket, :index)
-          
-            
         ) %>
       </div>
 
       <%= if @user_signed_in == true do %>
-            <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
-        <%= link("Log out",
-          to: Routes.user_session_path(@socket, :delete),
-          method: :delete
-         
-        ) %>
-      </div>
+        <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+          <%= link("Log out",
+            to: Routes.user_session_path(@socket, :delete),
+            method: :delete
+          ) %>
+        </div>
       <% else %>
-            <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
-        <%= live_redirect("Register",
-          to: Routes.user_registration_path(@socket, :new)
-         
-        ) %>
+        <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+          <%= live_redirect("Register",
+            to: Routes.user_registration_path(@socket, :new)
+          ) %>
         </div>
-              <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
-        <%= live_redirect("Log in",
-          to: Routes.user_session_path(@socket, :new)
-         
-        ) %>
+        <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
+          <%= live_redirect("Log in",
+            to: Routes.user_session_path(@socket, :new)
+          ) %>
         </div>
-
       <% end %>
-      
 
       <div class="flex cursor-pointer bg-[#FECC18] text-[#3C3E3E] rounded-3xl p-4 transition-all duration-500 ease-in-out  items-center gap-1">
         <p>Get Started</p>

@@ -1,29 +1,56 @@
-<h1>Log in</h1>
+<div class="h-[100vh] w-[100%] bg-gradient-to-b from-[#37404A]  via-[#7269EF]  to-[#262E35]">
+  <div class="bg-black/50 h-[100vh] py-8 flex justify-center flex-col items-center w-[100%]">
+    <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
+      <%= if @error_message do %>
+        <div class="alert alert-danger">
+          <p><%= @error_message %></p>
+        </div>
+      <% end %>
 
-<.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
-  <%= if @error_message do %>
-    <div class="alert alert-danger">
-      <p><%= @error_message %></p>
-    </div>
-  <% end %>
+      <div class="bg-[#262e35]/75 md:h-[500px] flex justify-center py-8 md:py-0 items-center gap-4 flex-col w-[350px] md:w-[600px]">
+        <%= Heroicons.icon("chat-bubble-oval-left-ellipsis",
+          type: "solid",
+          class: "h-8  text-[#7269EF] transition-all duration-500 ease-in-out rounded-xl w-8"
+        ) %>
+        <p class="text-[#7269EF] text-center text-xl poppins-regular">
+          Log in to your account
+        </p>
+        <div class="flex flex-col w-[70%]">
+          <%= label(f, :email, class: "text-[#eff2f7] poppins-regular") %>
+          <%= email_input(f, :email,
+            required: true,
+            class:
+              "w-[100%] h-[45px] bg-[#eff2f7] poppins-regular text-[#37404A] border border-transparent   focus:ring-0 border-none"
+          ) %>
+        </div>
 
-  <%= label(f, :email) %>
-  <%= email_input(f, :email, required: true) %>
+        <div class="flex flex-col w-[70%]">
+          <%= label(f, :password, class: "text-[#eff2f7] poppins-regular") %>
+          <%= password_input(f, :password,
+            required: true,
+            class:
+              "w-[100%] h-[45px] bg-[#eff2f7] poppins-regular text-[#37404A] border border-transparent   focus:ring-0 border-none"
+          ) %>
+        </div>
 
-  <%= label(f, :password) %>
-  <%= password_input(f, :password, required: true) %>
+        <div class="flex flex-row-reverse gap-2 text-[#eff2f7]  items-center">
+          <%= label(f, :remember_me, "Keep me  logged in for 60 days") %>
+          <%= checkbox(f, :remember_me) %>
+        </div>
 
-  <%= label(f, :remember_me, "Keep me logged in for 60 days") %>
-  <%= checkbox(f, :remember_me) %>
-
-  <div>
-    <%= submit("Log in") %>
+        <div class="flex justify-center items-center">
+          <%= submit("Log in",
+            class:
+              "bg-[#7269EF]  px-4 py-2 text-[#eff2f7] text-xl hover:scale-105 transition-all ease-in-out duration-500 poppins-regular cursor-pointer"
+          ) %>
+        </div>
+        <p class="text-[#eff2f7] ">
+          <%= link("Register", to: Routes.user_registration_path(@conn, :new)) %> | <%= link(
+            "Forgot your password?",
+            to: Routes.user_reset_password_path(@conn, :new)
+          ) %>
+        </p>
+      </div>
+    </.form>
   </div>
-</.form>
-
-<p>
-  <%= link("Register", to: Routes.user_registration_path(@conn, :new)) %> | <%= link(
-    "Forgot your password?",
-    to: Routes.user_reset_password_path(@conn, :new)
-  ) %>
-</p>
+</div>

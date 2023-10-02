@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :carpool, Carpool.Repo,
   username: "root",
-  password: "Michael@11",
+  password: "Khohisan@7",
   database: "carpool_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,

@@ -1,39 +1,81 @@
 <div>
-  <h2><%= @title %></h2>
+  <div>
+    <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+      <%= @title %>
+    </h1>
 
-  <.form
-    let={f}
-    for={@changeset}
-    id="booking-form"
-    phx-target={@myself}
-    phx-change="validate"
-    phx-submit="save"
-    phx-hook="Location"
-    id="location"
-  >
-    <%= hidden_input(f, :booking_latitude_to, id: "booking_latitude_to_input") %>
-    <%= hidden_input(f, :booking_longitude_to, id: "booking_longitude_to_input") %>
-    <%= hidden_input(f, :booking_latitude_from, id: "booking_latitude_from_input") %>
-    <%= hidden_input(f, :booking_longitude_from, id: "booking_longitude_from_input") %>
-    <%= hidden_input(f, :trip_id, value: @trip.id) %>
-    <%= label(f, :status) %>
-    <%= text_input(f, :status) %>
-    <%= error_tag(f, :status) %>
+    <.form
+      let={f}
+      for={@changeset}
+      id="booking-form"
+      phx-target={@myself}
+      phx-change="validate"
+      phx-submit="save"
+      phx-hook="Location"
+      id="location"
+    >
+      <%= hidden_input(f, :booking_latitude_to, id: "booking_latitude_to_input") %>
+      <%= hidden_input(f, :booking_longitude_to, id: "booking_longitude_to_input") %>
+      <%= hidden_input(f, :booking_latitude_from, id: "booking_latitude_from_input") %>
+      <%= hidden_input(f, :booking_longitude_from, id: "booking_longitude_from_input") %>
+      <%= hidden_input(f, :trip_id, value: @trip.id) %>
+      <div class="flex gap-2 w-[80%] mx-auto flex-col">
+        <div class="flex gap-2 flex-row w-[100%]">
+          <div class="w-[50%]">
+            <%= text_input(f, :location_from,
+              id: "booking_input2",
+              placeholder: "enter picking location",
+              class:
+                "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+            ) %>
+            <p class="pt-5">
+              <%= error_tag(f, :location_from) %>
+            </p>
+          </div>
+          <div class="w-[50%]">
+            <%= text_input(f, :location_to,
+              id: "booking_input1",
+              placeholder: "enter destination",
+              class:
+                "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+            ) %>
+            <p class="pt-5">
+              <%= error_tag(f, :location_to) %>
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-2 flex-row w-[100%]">
+          <div class="w-[50%]">
+            <%= text_input(f, :status,
+              placeholder: "enter status",
+              class:
+                "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+            ) %>
+            <p class="pt-5">
+              <%= error_tag(f, :status) %>
+            </p>
+          </div>
 
-    <%= label(f, :location_to) %>
-    <%= text_input(f, :location_to, id: "booking_input1") %>
-    <%= error_tag(f, :location_to) %>
+          <div class="w-[50%]">
+            <%= text_input(f, :notes,
+              placeholder: "enter some ride notes",
+              class:
+                "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+            ) %>
+            <p class="pt-5">
+              <%= error_tag(f, :notes) %>
+            </p>
+          </div>
+        </div>
 
-    <%= label(f, :location_from) %>
-    <%= text_input(f, :location_from, id: "booking_input2") %>
-    <%= error_tag(f, :location_from) %>
-
-    <%= label(f, :notes) %>
-    <%= text_input(f, :notes) %>
-    <%= error_tag(f, :notes) %>
-
-    <div>
-      <%= submit("Save", phx_disable_with: "Saving...") %>
-    </div>
-  </.form>
+        <div class="flex justify-end">
+          <%= submit("Save",
+            phx_disable_with: "Saving...",
+            class:
+              "bg-[#887CF2] cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 px-8 py-2 text-xl  flex justify-center items-center gap-2 text-white rounded-xl"
+          ) %>
+        </div>
+      </div>
+    </.form>
+  </div>
 </div>

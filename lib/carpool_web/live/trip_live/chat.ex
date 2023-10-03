@@ -5,7 +5,6 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
   def render(assigns) do
     ~H"""
     <div>
-
       <div id="myModal" class="modal">
         <div class="modal-content pt-12 ">
           <div class="w-[100%]   overflow-hidden h-[70vh] flex flex-col">
@@ -25,7 +24,7 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
                   <%= if chat.firstname == "admin" do %>
                     <div class="flex  justify-start   ">
                       <p class="   p-2 md:h-[70px] text-xs bg-white break-words text-black w-[200px]">
-                       this is a dummy
+                        this is a dummy
                       </p>
                     </div>
                   <% else %>

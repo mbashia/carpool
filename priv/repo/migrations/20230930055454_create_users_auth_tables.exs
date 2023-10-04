@@ -9,6 +9,7 @@ defmodule Carpool.Repo.Migrations.CreateUsersAuthTables do
       add :firstname, :string
       add :lastname, :string
       add :location, :string
+      add :image, :string
 
       timestamps()
     end

@@ -6,6 +6,7 @@ defmodule Carpool.Accounts.User do
   alias Carpool.Trips.Trip
   alias Carpool.Bookings.Booking
   alias Carpool.Messages.Message
+  use Waffle.Ecto.Schema
 
   schema "users" do
     field :firstname, :string
@@ -20,7 +21,7 @@ defmodule Carpool.Accounts.User do
     has_many :trips, Trip
     has_many :bookings, Booking
     has_many :messages, Message
-
+    field :image, Carpool.UserImage.Type
     timestamps()
   end
 
@@ -44,6 +45,7 @@ defmodule Carpool.Accounts.User do
   def registration_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:email, :password, :firstname, :lastname, :location])
+    |> cast_attachments(attrs, [:image])
     |> validate_email()
     |> validate_password(opts)
   end

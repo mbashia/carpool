@@ -68,7 +68,14 @@ defmodule CarpoolWeb.TripLive.Show do
         {:noreply,
          socket
          |> put_flash(:info, "Message created successfully")
-         |> assign(:chat_changeset, chat_changeset)}
+         |> assign(:chat_changeset, chat_changeset)
+         |> assign(
+           :chats,
+           Messages.list_messages_for_a_receiver_and_sender(
+             socket.assigns.user.id,
+             receiver_id
+           )
+         )}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

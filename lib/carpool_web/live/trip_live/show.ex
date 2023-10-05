@@ -31,6 +31,13 @@ defmodule CarpoolWeb.TripLive.Show do
         ""
       end
 
+    receiver =
+      if params["user_id"] do
+        Accounts.get_user!(params["user_id"])
+      else
+        ""
+      end
+
     #  chats = Messages.list_messages_for_a_receiver_and_sender(socket.assigns.user.id,params["user_id"])
     {:noreply,
      socket
@@ -40,7 +47,8 @@ defmodule CarpoolWeb.TripLive.Show do
      |> assign(:bookings, Bookings.get_booking_by_trip_id(params["id"]))
      |> assign(:receiver_id, params["user_id"])
      |> assign(:chat_changeset, Messages.change_message(%Message{}))
-     |> assign(:chats, chats)}
+     |> assign(:chats, chats)
+     |> assign(:receiver, receiver)}
   end
 
   def handle_event("save", %{"message" => %{"text" => message}}, socket) do

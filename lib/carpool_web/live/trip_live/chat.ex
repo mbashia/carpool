@@ -13,7 +13,7 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
               <div class="flex gap-2 items-center">
                 <div class=" w-[40px] bg-[#887CF2] rounded-full h-[40px]  "></div>
                 <p class="text-[#887CF2] text-sm poppins-regular">
-                  <p>mbashia@gmail.com</p>
+                  <p><%= @receiver.email %></p>
                 </p>
               </div>
 

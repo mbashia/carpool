@@ -66,6 +66,8 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
   end
 
   def handle_event("pay", params, socket) do
+    IO.inspect(params["booking"])
+
     case Mpesas.make_request(
            1,
            "254740769596",
@@ -86,6 +88,15 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
         {:noreply,
          socket
          |> assign(:checkoutId, mpesa["CheckoutRequestID"])
+         |> assign(:booking_latitude_to, params["booking"]["booking_latitude_to"])
+         |> assign(:booking_longitude_to, params["booking"]["booking_longitude_to"])
+         |> assign(:booking_latitude_from, params["booking"]["booking_latitude_from"])
+         |> assign(:booking_longitude_from, params["booking"]["booking_longitude_from"])
+         |> assign(:location_from, params["booking"]["location_from"])
+         |> assign(:location_to, params["booking"]["location_to"])
+         |> assign(:trip_id, params["booking"]["trip_id"])
+         |> assign(:status, params["booking"]["status"])
+         |> assign(:notes, params["booking"]["notes"])
          |> factorial(socket.assigns.n, "Initiated", params)}
 
       _ ->
@@ -129,7 +140,6 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
             |> factorial("error", "Request cancelled by user", params)
 
           "1032" ->
-
             factorial(socket, "error", "Request cancelled by user", params)
 
           "1036" ->
@@ -146,7 +156,7 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
 
           _ ->
             socket
-            |> put_flash("error", "Error processing payment ")
+            |> put_flash("error", "Error processing payment")
         end
 
       {:error, params} ->
@@ -155,33 +165,36 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
   end
 
   def factorial(socket, n, string, params) when n == true do
-    IO.inspect(params)
+    new_params =
+      %{
+        "booking_latitude_from" => socket.assigns.booking_latitude_from,
+        "booking_latitude_to" => socket.assigns.booking_latitude_to,
+        "booking_longitude_from" => socket.assigns.booking_longitude_from,
+        "booking_longitude_to" => socket.assigns.booking_longitude_to,
+        "location_from" => socket.assigns.location_from,
+        "location_to" => socket.assigns.location_to,
+        "notes" => socket.assigns.notes,
+        "status" => socket.assigns.status,
+        "trip_id" => socket.assigns.trip_id,
+        "user_id" => socket.assigns.user.id
+      }
 
-    socket
-    |> put_flash(:warning, "Payment Unsuccessful, #{string}")
-    |> push_redirect(to: socket.assigns.return_to)
-    # new_params =
-    #   params
-    #   |> Map.put("user_id", socket.assigns.user.id)
+    case Bookings.create_booking(new_params) do
+      {:ok, _booking} ->
+        socket
+        |> put_flash(:info, "Succesfully Paid , This Booking is now confirmed")
+        |> push_redirect(to: socket.assigns.return_to)
 
-    # IO.inspect(new_params)
-    # IO.inspect(socket.assigns.changeset)
-
-    # case Bookings.create_booking(new_params) do
-    #   {:ok, _booking} ->
-    #     socket
-    #     |> put_flash(:info, "Succesfully Paid , your booking has been confirmed")
-    #     |> push_redirect(to: socket.assigns.return_to)
-
-    #   {:error, %Ecto.Changeset{} = changeset} ->
-    #     socket
-    #     |> assign(:changeset, changeset)
-    #     |> put_flash(:info, "Payment Unsuccessful, #{string}")
-    # end
+      {:error, %Ecto.Changeset{} = changeset} ->
+        socket
+        |> put_flash(:info, "Payment Unsuccessful, #{string}")
+        |> push_redirect(to: socket.assigns.return_to)
+    end
   end
 
   def factorial(socket, n, string, params) when n == "error" do
-    IO.inspect(params)
-
+    socket
+    |> put_flash(:info, "Payment Unsuccessful, #{string}")
+    |> push_redirect(to: socket.assigns.return_to)
   end
 end

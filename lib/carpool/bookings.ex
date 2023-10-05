@@ -22,7 +22,7 @@ defmodule Carpool.Bookings do
   end
 
   def get_booking_by_trip_id(id) do
-    Repo.all(from b in Booking, where: b.trip_id == ^id and b.status == "inactive")
+    Repo.all(from b in Booking, where: b.trip_id == ^id)
     |> Repo.preload(:user)
   end
 

@@ -28,33 +28,20 @@
     />
   </.modal>
 <% end %>
-
-<ul>
-  <li>
-    <strong>From:</strong>
-    <%= @trip.from %>
-  </li>
-
-  <li>
-    <strong>To:</strong>
-    <%= @trip.to %>
-  </li>
-
-  <li>
-    <strong>Capacity:</strong>
-    <%= @trip.capacity %>
-  </li>
-
-  <li>
-    <strong>Notes:</strong>
-    <%= @trip.notes %>
-  </li>
-
-  <li>
-    <strong>Price:</strong>
-    <%= @trip.price %>
-  </li>
-</ul>
+<div class="bg-[#3C3E3E] h-[100px] text-[#FECC18] uppercase py-4 text-7xl font-bold flex justify-center items-center">
+  Trip
+</div>
+<%= live_redirect(to: Routes.trip_index_path(@socket, :index)) do %>
+  <div class="p-2 flex gap-2 items-center">
+    <%= Heroicons.icon("arrow-long-left",
+      type: "solid",
+      class: "h-6 text-[#3C3E3E]  w-6"
+    ) %>
+    <p>
+      Back
+    </p>
+  </div>
+<% end %>
 
 <div class="hidden" id="destination_latitude">
   <%= @trip.latitude_to %>
@@ -69,35 +56,14 @@
 <div class="hidden" id="origin_longitude">
   <%= @trip.longitude_to %>
 </div>
-<p class="text-bold text-2xl m-4">this are the bookings for this trip</p>
-<div class="flex flex-col">
-  <%= for booking <- @bookings do %>
-    <div class="flex gap-4 m-4">
-      <span><%= booking.user.firstname %></span>
-      <span><%= booking.user.lastname %></span>
-
-      <span><%= booking.location_to %></span>
-      <span><%= booking.location_from %></span>
-
-      <span><%= booking.inserted_at %></span>
-
-      <%= if @user.id == @trip.user_id do %>
-        <span class="text-blue">
-          <%= live_redirect("chat with #{booking.user.firstname} #{booking.user.lastname}",
-            to: Routes.trip_show_path(@socket, :chat, @trip, booking.user.id)
-          ) %>
-        </span>
-      <% end %>
-    </div>
+<div class="flex w-[100%] justify-end p-4">
+  <%= live_redirect to: Routes.trip_show_path(@socket , :addbooking , @trip) do %>
+    <p class="p-2 bg-[#3C3E3E] rounded-md text-[#FECC18]">
+      Add  A Booking
+    </p>
   <% end %>
 </div>
-<%= live_redirect to: Routes.trip_show_path(@socket , :addbooking , @trip) do %>
-  <p class="bg-red-500 p-2">
-    Add  A Booking
-  </p>
-<% end %>
 
-<span><%= live_redirect("Back", to: Routes.trip_index_path(@socket, :index)) %></span>
 <div class="hidden">
   <%= for booking <- @trip.bookings do %>
     <div class="waypoints">
@@ -118,7 +84,103 @@
   <% end %>
 </div>
 
-<div class="py-8">
-  <div phx-hook="MapBox" class="h-[50vh]  mx-auto  z-0 w-[80%]" id="mapbox"></div>
-  <div id="sidebar" />
+<div class="py-8 flex w-[95%] mx-auto justify-between ">
+  <div class="w-[40%] flex flex-col gap-2">
+    <div class="bg-white  flex flex-col gap-2 rounded-md px-8 py-4 shadow-sm shadow-gray-500">
+      <div class="w-[100%] flex justify-between items-center">
+        <div class="flex flex-col gap-1">
+          <p class="text-[#3C3E3E]  font-semibold">
+            Origin:
+          </p>
+          <p>
+            <%= @trip.from %>
+          </p>
+        </div>
+        <div class="flex flex-col gap-1">
+          <p class="text-[#3C3E3E]  font-semibold">
+            Destination
+          </p>
+          <p>
+            <%= @trip.to %>
+          </p>
+        </div>
+      </div>
+      <div class="w-[100%] flex justify-between items-center">
+        <div class="flex flex-col gap-1">
+          <p class="text-[#3C3E3E]  font-semibold">
+            Depature Time
+          </p>
+          <p>
+            <%= @trip.departure_time %>
+          </p>
+        </div>
+        <div class="flex flex-col gap-1">
+          <p class="text-[#3C3E3E]  font-semibold">
+            Return Time
+          </p>
+          <p>
+            <%= @trip.return_time %>
+          </p>
+        </div>
+      </div>
+      <div class="bg-gray-100 rounded-md p-2">
+        <p class="text-[#3C3E3E]  font-semibold">
+          Notes
+        </p>
+        <p>
+          <%= @trip.notes %>
+        </p>
+      </div>
+      <p class="font-semibold text-xl">
+        Trip by:
+      </p>
+      <div class="flex gap-2 items-center">
+        <%= img_tag(
+          Carpool.UserImage.url({@trip.user.image, {@trip.user}},
+            signed: true
+          ),
+          class: "h-[40px] w-[40px] border-2 border-[#FECC18] rounded-full "
+        ) %>
+        <div class="flex flex-col gap-0">
+          <p>
+            <%= @trip.user.firstname %>
+          </p>
+          <p>
+            <%= @trip.user.lastname %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <%= if length(@trip.bookings) > 0 do %>
+      <p class="text-[#3C3E3E]  font-semibold">
+        Bookings for this trip
+      </p>
+
+      <div class="flex flex-col">
+        <%= for booking <- @bookings do %>
+          <div class="flex gap-4 m-4">
+            <span><%= booking.user.firstname %></span>
+            <span><%= booking.user.lastname %></span>
+
+            <span><%= booking.location_to %></span>
+            <span><%= booking.location_from %></span>
+
+            <span><%= booking.inserted_at %></span>
+
+            <%= if @user.id == @trip.user_id do %>
+              <span class="text-blue">
+                <%= live_redirect("chat with #{booking.user.firstname} #{booking.user.lastname}",
+                  to: Routes.trip_show_path(@socket, :chat, @trip, booking.user.id)
+                ) %>
+              </span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="w-[58%]">
+    <div phx-hook="MapBox" class="h-[50vh]  mx-auto  z-0 w-[100%]" id="mapbox"></div>
+    <div id="sidebar" />
+  </div>
 </div>

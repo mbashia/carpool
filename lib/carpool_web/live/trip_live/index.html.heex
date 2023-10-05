@@ -1,5 +1,3 @@
-<h1>Listing Trips</h1>
-
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.trip_index_path(@socket, :index)}>
     <.live_component
@@ -13,48 +11,122 @@
     />
   </.modal>
 <% end %>
-<.form let={f} phx-change="search" for={@changeset}>
-  <%= text_input(f, :search, placeholder: "Search trip") %>
-</.form>
 
-<table>
-  <thead>
-    <tr>
-      <th>From</th>
-      <th>To</th>
-      <th>Capacity</th>
-      <th>Notes</th>
-      <th>Price</th>
+<div class="bg-[#3C3E3E] h-[100px] text-[#FECC18] uppercase py-4 text-7xl font-bold flex justify-center items-center">
+  Trips
+</div>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="trips">
+<div class="mt-6">
+  <div class="flex justify-center gap-8 items-center w-[100%]">
+    <.form let={f} phx-change="search" for={@changeset} class="w-[70%]">
+      <%= text_input(f, :search,
+        placeholder: "Search trip",
+        class:
+          "w-[100%] border-2 border-[#3C3E3E] rounded-md focus:border-[#3C3E3E] focus:outline-none"
+      ) %>
+    </.form>
+    <%= live_patch("Add New Trip",
+      to: Routes.trip_index_path(@socket, :new),
+      class:
+        "bg-[#3C3E3E] p-2 text-white hover:scale-105 transition-all ease-in-out duration-500 cursor-pointer rounded-md "
+    ) %>
+  </div>
+
+  <div class="w-[90%] mx-auto mt-8 grid grid-cols-3 ">
     <%= for trip <- @trips do %>
-      <tr id={"trip-#{trip.id}"}>
-        <td><%= trip.from %></td>
-        <td><%= trip.to %></td>
-        <td><%= trip.capacity %></td>
-        <td><%= trip.notes %></td>
-        <td><%= trip.price %></td>
+      <div class="bg-white  flex flex-col gap-2 rounded-md px-8 py-4 shadow-sm shadow-gray-500">
+        <div class="flex justify-end gap-2 ">
+          <%= if @user.id == trip.user.id do %>
+            <%= live_patch(to: Routes.trip_index_path(@socket, :edit, trip)) do %>
+              <%= Heroicons.icon("pencil",
+                type: "solid",
+                class: "h-6 text-blue-500  w-6"
+              ) %>
+            <% end %>
 
-        <td>
-          <span>
-            <%= live_redirect("Show", to: Routes.trip_show_path(@socket, :show, trip)) %>
-          </span>
-          <span><%= live_patch("Edit", to: Routes.trip_index_path(@socket, :edit, trip)) %></span>
-          <span>
-            <%= link("Delete",
-              to: "#",
-              phx_click: "delete",
-              phx_value_id: trip.id,
-              data: [confirm: "Are you sure?"]
-            ) %>
-          </span>
-        </td>
-      </tr>
+            <%= link(
+                to: "#",
+                phx_click: "delete",
+                phx_value_id: trip.id,
+                data: [confirm: "Are you sure?"]
+              ) do %>
+              <%= Heroicons.icon("trash",
+                type: "solid",
+                class: "h-6 text-red-500  w-6"
+              ) %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="w-[100%] flex justify-between items-center">
+          <div class="flex flex-col gap-1">
+            <p class="text-[#3C3E3E]  font-semibold">
+              Origin:
+            </p>
+            <p>
+              <%= trip.from %>
+            </p>
+          </div>
+          <div class="flex flex-col gap-1">
+            <p class="text-[#3C3E3E]  font-semibold">
+              Destination
+            </p>
+            <p>
+              <%= trip.to %>
+            </p>
+          </div>
+        </div>
+        <div class="w-[100%] flex justify-between items-center">
+          <div class="flex flex-col gap-1">
+            <p class="text-[#3C3E3E]  font-semibold">
+              Depature Time
+            </p>
+            <p>
+              <%= trip.departure_time %>
+            </p>
+          </div>
+          <div class="flex flex-col gap-1">
+            <p class="text-[#3C3E3E]  font-semibold">
+              Return Time
+            </p>
+            <p>
+              <%= trip.return_time %>
+            </p>
+          </div>
+        </div>
+        <div class="bg-gray-100 rounded-md p-2">
+          <p class="text-[#3C3E3E]  font-semibold">
+            Notes
+          </p>
+          <p>
+            <%= trip.notes %>
+          </p>
+        </div>
+        <p class="font-semibold text-xl">
+          Trip by:
+        </p>
+        <div class="flex gap-2 items-center">
+          <%= img_tag(
+            Carpool.UserImage.url({trip.user.image, {trip.user}},
+              signed: true
+            ),
+            class: "h-[40px] w-[40px] border-2 border-[#FECC18] rounded-full "
+          ) %>
+          <div class="flex flex-col gap-0">
+            <p>
+              <%= trip.user.firstname %>
+            </p>
+            <p>
+              <%= trip.user.lastname %>
+            </p>
+          </div>
+        </div>
+        <div class="w-[100%] flex flex-col justify-center items-center">
+          <%= live_redirect(" See Route and add a booking",
+            to: Routes.trip_show_path(@socket, :show, trip),
+            class: "bg-[#FECC18] text-[#3C3E3E] p-2  rounded-md "
+          ) %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
-<span><%= live_patch("New Trip", to: Routes.trip_index_path(@socket, :new)) %></span>
+  </div>
+</div>

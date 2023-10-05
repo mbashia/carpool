@@ -19,6 +19,7 @@ defmodule Carpool.Trips do
   """
   def list_trips do
     Repo.all(Trip)
+    |> Repo.preload(:user)
   end
 
   @doc """
@@ -35,7 +36,7 @@ defmodule Carpool.Trips do
       ** (Ecto.NoResultsError)
 
   """
-  def get_trip!(id), do: Repo.get!(Trip, id) |> Repo.preload(:bookings)
+  def get_trip!(id), do: Repo.get!(Trip, id) |> Repo.preload(:bookings) |> Repo.preload(:user)
 
   def search(search) do
     query =

@@ -1,5 +1,5 @@
 <div>
-  <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+  <h1 class="font-extrabold  text-xl  text-[#3C3E3E]">
     <%= @title %>
   </h1>
 
@@ -20,11 +20,13 @@
     <div class="flex gap-2 w-[80%] mx-auto flex-col">
       <div class="flex gap-2 flex-row w-[100%]">
         <div class="w-[50%]">
+          <%= label(f, :origin_location) %>
+
           <%= text_input(f, :from,
             id: "location1",
             placeholder: "enter location",
             class:
-              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
           ) %>
           <p class="pt-5">
             <%= error_tag(f, :from) %>
@@ -32,11 +34,13 @@
         </div>
 
         <div class="w-[50%]">
+          <%= label(f, :destination_location) %>
+
           <%= text_input(f, :to,
             id: "location2",
             placeholder: "enter destination",
             class:
-              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
           ) %>
           <p class="pt-5">
             <%= error_tag(f, :to) %>
@@ -45,10 +49,12 @@
       </div>
       <div class="flex gap-2 flex-row w-[100%]">
         <div class="w-[50%]">
+          <%= label(f, :capacity) %>
+
           <%= text_input(f, :capacity,
             placeholder: "enter capacity",
             class:
-              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
           ) %>
           <p class="pt-5">
             <%= error_tag(f, :capacity) %>
@@ -56,10 +62,12 @@
         </div>
 
         <div class="w-[50%]">
+          <%= label(f, :notes) %>
+
           <%= text_input(f, :notes,
             placeholder: "enter some ride notes",
             class:
-              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
           ) %>
           <p class="pt-5">
             <%= error_tag(f, :notes) %>
@@ -68,37 +76,25 @@
       </div>
       <div class="flex gap-2 flex-row w-[100%]">
         <div class="w-[50%]">
-          <%= text_input(f, :price,
-            placeholder: "enter  ride price",
-            class:
-              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-          ) %>
-          <p class="pt-5">
-            <%= error_tag(f, :price) %>
-          </p>
-        </div>
-
-        <div class="w-[50%]">
           <%= label(f, :departure) %>
 
-          <%= time_select(f, :departure_time,
+          <%= time_input(f, :departure_time,
             placeholder: "enter some ride departure_time",
             class:
-              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
           ) %>
           <p class="pt-5">
             <%= error_tag(f, :departure_time) %>
           </p>
         </div>
-      </div>
-      <div class="flex gap-2 flex-row w-[100%]">
+
         <div class="w-[50%]">
           <%= label(f, :return) %>
 
-          <%= time_select(f, :return_time,
+          <%= time_input(f, :return_time,
             placeholder: "enter some ride return_time",
             class:
-              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
           ) %>
           <p class="pt-5">
             <%= error_tag(f, :return_time) %>
@@ -110,7 +106,7 @@
         <%= submit("Save",
           phx_disable_with: "Saving...",
           class:
-            "bg-[#887CF2] cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 px-8 py-2 text-xl  flex justify-center items-center gap-2 text-white rounded-xl"
+            "bg-[#3C3E3E] cursor-pointer text-[#FECC18] hover:scale-105 transition-all ease-in-out duration-500 px-8 py-2 text-xl  flex justify-center items-center gap-2  rounded-xl"
         ) %>
       </div>
     </div>

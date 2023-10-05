@@ -7,7 +7,6 @@ defmodule Carpool.Repo.Migrations.CreateTrips do
       add :to, :string
       add :capacity, :string
       add :notes, :string
-      add :price, :string
       add :user_id, :integer
       add :longitude_to, :float
       add :latitude_to, :float

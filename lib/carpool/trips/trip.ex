@@ -7,7 +7,7 @@ defmodule Carpool.Trips.Trip do
     field :capacity, :string
     field :from, :string
     field :notes, :string
-    field :price, :string
+
     field :latitude_from, :float
     field :latitude_to, :float
     field :longitude_from, :float
@@ -30,7 +30,6 @@ defmodule Carpool.Trips.Trip do
       :to,
       :capacity,
       :notes,
-      :price,
       :user_id,
       :longitude_to,
       :latitude_to,
@@ -44,7 +43,6 @@ defmodule Carpool.Trips.Trip do
       :to,
       :capacity,
       :notes,
-      :price,
       :user_id,
       :longitude_to,
       :latitude_to,

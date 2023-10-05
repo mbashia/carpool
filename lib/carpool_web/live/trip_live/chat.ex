@@ -1,6 +1,7 @@
 defmodule CarpoolWeb.TripLive.ChatComponent do
   use CarpoolWeb, :live_component
   alias Carpool.Messages
+  alias Carpool.Messages.Message
 
   def render(assigns) do
     ~H"""
@@ -20,17 +21,17 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
             </div>
             <div class="bg-gray-100 h-[80%] flex flex-col-reverse overflow-y-scroll  md:p-4 p-2  w-[100%]">
               <div class="flex flex-col w-[100%]   gap-2">
-                <%= for chat <- @users do %>
-                  <%= if chat.firstname == "admin" do %>
+                <%= for chat <- @chats do %>
+                  <%= if chat.sender_id != @user.id do %>
                     <div class="flex  justify-start   ">
                       <p class="   p-2 md:h-[70px] text-xs bg-white break-words text-black w-[200px]">
-                        this is a dummy
+                        <%= chat.text %>
                       </p>
                     </div>
                   <% else %>
                     <div class="flex  justify-end   ">
                       <p class="  text-white p-2 md:h-[70px] break-words text-xs bg-[#887CF2] w-[200px]">
-                        this is another dummy
+                        <%= chat.text %>
                       </p>
                     </div>
                   <% end %>
@@ -39,13 +40,7 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
             </div>
 
             <div class="bg-gray-100 rounded-b-xl border-gray-200 border-t-2  pb-8  p-4   w-[100%]">
-              <.form
-                let={f}
-                for={@chat_changeset}
-                id="message-form"
-                phx-submit="save"
-                phx-target={@myself}
-              >
+              <.form let={f} for={@chat_changeset} id="message-form" phx-submit="save">
                 <div class="flex justify-between  w-[100%] items-center">
                   <div class="md:w-[85%] w-[75%] text-black ">
                     <%= text_input(f, :text,
@@ -71,27 +66,5 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
       </div>
     </div>
     """
-  end
-
-  def handle_event("save", %{"message" => %{"text" => message}}, socket) do
-    IO.inspect(message)
-    receiver_id = String.to_integer(socket.assigns.receiver_id)
-
-    message_params = %{
-      "text" => message,
-      "sender_id" => socket.assigns.user.id,
-      "receiver_id" => receiver_id
-    }
-
-    case Messages.create_message(message_params) do
-      {:ok, _message} ->
-        {:noreply,
-         socket
-         |> put_flash(:info, "Message created successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
-    end
   end
 end

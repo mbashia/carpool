@@ -67,6 +67,17 @@
                 <%= error_tag(f, :notes) %>
               </p>
             </div>
+
+            <div class="w-[50%]">
+              <%= select(f, :subscription, ["daily", "weekly", "monthly"],
+                prompt: "Select a subscription",
+                class:
+                  "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
+              ) %>
+              <p class="pt-5">
+                <%= error_tag(f, :subscription) %>
+              </p>
+            </div>
           </div>
 
           <div class="flex justify-end">

@@ -11,6 +11,7 @@ defmodule Carpool.Bookings.Booking do
     field :booking_latitude_from, :float
     field :booking_longitude_from, :float
     field :notes, :string
+    field :subscription, :string
     field :phone_number, :string
     belongs_to :user, User, foreign_key: :user_id
     belongs_to :trip, Trip, foreign_key: :trip_id
@@ -31,7 +32,8 @@ defmodule Carpool.Bookings.Booking do
       :booking_latitude_to,
       :booking_longitude_to,
       :booking_latitude_from,
-      :booking_longitude_from
+      :booking_longitude_from,
+      :subscription
     ])
     |> validate_required([
       :phone_number,
@@ -43,7 +45,8 @@ defmodule Carpool.Bookings.Booking do
       :booking_latitude_to,
       :booking_longitude_to,
       :booking_latitude_from,
-      :booking_longitude_from
+      :booking_longitude_from,
+      :subscription
     ])
     |> validate_format(
       :phone_number,

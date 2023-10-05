@@ -24,7 +24,7 @@
       return_to={Routes.trip_show_path(@socket, :show, @trip)}
       chat_changeset={@chat_changeset}
       user={@user}
-      users={@users}
+      chats={@chats}
     />
   </.modal>
 <% end %>
@@ -131,24 +131,36 @@
           <%= @trip.notes %>
         </p>
       </div>
+      <div class="flex justify-between"></div>
       <p class="font-semibold text-xl">
         Trip by:
       </p>
-      <div class="flex gap-2 items-center">
-        <%= img_tag(
-          Carpool.UserImage.url({@trip.user.image, {@trip.user}},
-            signed: true
-          ),
-          class: "h-[40px] w-[40px] border-2 border-[#FECC18] rounded-full "
-        ) %>
-        <div class="flex flex-col gap-0">
-          <p>
-            <%= @trip.user.firstname %>
-          </p>
-          <p>
-            <%= @trip.user.lastname %>
-          </p>
+      <div class="flex justify-between">
+        <div>
+          <div class="flex gap-2 items-center">
+            <%= img_tag(
+              Carpool.UserImage.url({@trip.user.image, {@trip.user}},
+                signed: true
+              ),
+              class: "h-[40px] w-[40px] border-2 border-[#FECC18] rounded-full "
+            ) %>
+            <div class="flex flex-col gap-0">
+              <p>
+                <%= @trip.user.firstname %>
+              </p>
+              <p>
+                <%= @trip.user.lastname %>
+              </p>
+            </div>
+          </div>
         </div>
+        <%= if @user.id != @trip.user_id do %>
+          <div>
+            <%= live_redirect("chat with driver",
+              to: Routes.trip_show_path(@socket, :chat, @trip, @trip.user.id)
+            ) %>
+          </div>
+        <% end %>
       </div>
     </div>
     <%= if length(@trip.bookings) > 0 do %>

@@ -95,6 +95,7 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
          |> assign(:trip_id, params["booking"]["trip_id"])
          |> assign(:phone_number, params["booking"]["phone_number"])
          |> assign(:notes, params["booking"]["notes"])
+         |> assign(:subscription, params["booking"]["subscription"])
          |> factorial(socket.assigns.n, "Initiated", params)}
 
       _ ->
@@ -163,19 +164,19 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
   end
 
   def factorial(socket, n, string, params) when n == true do
-    new_params =
-      %{
-        "booking_latitude_from" => socket.assigns.booking_latitude_from,
-        "booking_latitude_to" => socket.assigns.booking_latitude_to,
-        "booking_longitude_from" => socket.assigns.booking_longitude_from,
-        "booking_longitude_to" => socket.assigns.booking_longitude_to,
-        "location_from" => socket.assigns.location_from,
-        "location_to" => socket.assigns.location_to,
-        "notes" => socket.assigns.notes,
-        "phone_number" => socket.assigns.phone_number,
-        "trip_id" => socket.assigns.trip_id,
-        "user_id" => socket.assigns.user.id
-      }
+    new_params = %{
+      "booking_latitude_from" => socket.assigns.booking_latitude_from,
+      "booking_latitude_to" => socket.assigns.booking_latitude_to,
+      "booking_longitude_from" => socket.assigns.booking_longitude_from,
+      "booking_longitude_to" => socket.assigns.booking_longitude_to,
+      "location_from" => socket.assigns.location_from,
+      "location_to" => socket.assigns.location_to,
+      "notes" => socket.assigns.notes,
+      "phone_number" => socket.assigns.phone_number,
+      "trip_id" => socket.assigns.trip_id,
+      "user_id" => socket.assigns.user.id,
+      "subscription" => socket.assigns.subscription
+    }
 
     case Bookings.create_booking(new_params) do
       {:ok, _booking} ->

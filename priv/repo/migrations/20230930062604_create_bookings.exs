@@ -11,6 +11,8 @@ defmodule Carpool.Repo.Migrations.CreateBookings do
       add :booking_latitude_from, :float
       add :booking_longitude_from, :float
       add :notes, :string
+      add :subscription, :string
+
       add :user_id, :integer
       add :trip_id, :integer
 

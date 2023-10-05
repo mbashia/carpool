@@ -21,6 +21,15 @@ defmodule Carpool.Messages do
     Repo.all(Message)
   end
 
+  def list_messages_for_a_receiver_and_sender(receiver_id, sender_id) do
+    Repo.all(
+      from m in Message,
+        where:
+          (m.receiver_id == ^receiver_id and m.sender_id == ^sender_id) or
+            (m.receiver_id == ^sender_id and m.sender_id == ^receiver_id)
+    )
+  end
+
   @doc """
   Gets a single message.
 

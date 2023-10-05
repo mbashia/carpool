@@ -53,6 +53,7 @@ defmodule Carpool.MixProject do
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:ex_heroicons, "~> 2.0.0"},
       {:waffle, "~> 1.1.5"},
+      {:mpesa, "~> 0.1.2"},
       {:waffle_ecto, "~> 0.0.11"}
     ]
   end

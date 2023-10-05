@@ -102,6 +102,19 @@
         </div>
       </div>
 
+      <div class="w-[100%]">
+        <%= label(f, :kilometres_per_litre_for_your_car) %>
+
+        <%= text_input(f, :kilometres_per_litre,
+          placeholder: "Enter price per litre for your car",
+          class:
+            "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
+        ) %>
+        <p class="pt-5">
+          <%= error_tag(f, :kilometres_per_litre) %>
+        </p>
+      </div>
+
       <div class="flex justify-end">
         <%= submit("Save",
           phx_disable_with: "Saving...",

@@ -1,81 +1,159 @@
 <div>
   <div>
-    <h1 class="font-extrabold  text-xl  text-[#3C3E3E]">
-      <%= @title %>
-    </h1>
+    <div>
+      <h1 class="font-extrabold  text-xl  text-[#3C3E3E]">
+        <%= @title %>
+      </h1>
 
-    <.form
-      let={f}
-      for={@changeset}
-      id="booking-form"
-      phx-target={@myself}
-      phx-change="validate"
-      phx-submit="save"
-      phx-hook="Location"
-      id="location"
-    >
-      <%= hidden_input(f, :booking_latitude_to, id: "booking_latitude_to_input") %>
-      <%= hidden_input(f, :booking_longitude_to, id: "booking_longitude_to_input") %>
-      <%= hidden_input(f, :booking_latitude_from, id: "booking_latitude_from_input") %>
-      <%= hidden_input(f, :booking_longitude_from, id: "booking_longitude_from_input") %>
-      <%= hidden_input(f, :trip_id, value: @trip.id) %>
-      <div class="flex gap-2 w-[80%] mx-auto flex-col">
-        <div class="flex gap-2 flex-row w-[100%]">
-          <div class="w-[50%]">
-            <%= text_input(f, :location_from,
-              id: "booking_input2",
-              placeholder: "enter picking location",
-              class:
-                "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
-            ) %>
-            <p class="pt-5">
-              <%= error_tag(f, :location_from) %>
-            </p>
+      <.form
+        let={f}
+        for={@changeset}
+        id="booking-form"
+        phx-target={@myself}
+        phx-change="validate"
+        phx-submit="pay"
+        phx-hook="Location"
+        id="location"
+      >
+        <%= hidden_input(f, :booking_latitude_to, id: "booking_latitude_to_input") %>
+        <%= hidden_input(f, :booking_longitude_to, id: "booking_longitude_to_input") %>
+        <%= hidden_input(f, :booking_latitude_from, id: "booking_latitude_from_input") %>
+        <%= hidden_input(f, :booking_longitude_from, id: "booking_longitude_from_input") %>
+        <%= hidden_input(f, :trip_id, value: @trip.id) %>
+        <div class="flex gap-2 w-[80%] mx-auto flex-col">
+          <div class="flex gap-2 flex-row w-[100%]">
+            <div class="w-[50%]">
+              <%= text_input(f, :location_from,
+                id: "booking_input2",
+                placeholder: "enter picking location",
+                class:
+                  "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
+              ) %>
+              <p class="pt-5">
+                <%= error_tag(f, :location_from) %>
+              </p>
+            </div>
+            <div class="w-[50%]">
+              <%= text_input(f, :location_to,
+                id: "booking_input1",
+                placeholder: "enter destination",
+                class:
+                  "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
+              ) %>
+              <p class="pt-5">
+                <%= error_tag(f, :location_to) %>
+              </p>
+            </div>
           </div>
-          <div class="w-[50%]">
-            <%= text_input(f, :location_to,
-              id: "booking_input1",
-              placeholder: "enter destination",
+          <div class="flex gap-2 flex-row w-[100%]">
+            <div class="w-[50%]">
+              <%= text_input(f, :status,
+                placeholder: "enter status",
+                class:
+                  "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
+              ) %>
+              <p class="pt-5">
+                <%= error_tag(f, :status) %>
+              </p>
+            </div>
+
+            <div class="w-[50%]">
+              <%= text_input(f, :notes,
+                placeholder: "enter some ride notes",
+                class:
+                  "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
+              ) %>
+              <p class="pt-5">
+                <%= error_tag(f, :notes) %>
+              </p>
+            </div>
+          </div>
+
+          <div class="flex justify-end">
+            <%= submit("Save",
+              phx_disable_with: "Saving...",
               class:
-                "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
+                "bg-[#3C3E3E] cursor-pointer text-[#FECC18] cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 px-8 py-2 text-xl  flex justify-center items-center gap-2  rounded-xl"
             ) %>
-            <p class="pt-5">
-              <%= error_tag(f, :location_to) %>
-            </p>
           </div>
         </div>
-        <div class="flex gap-2 flex-row w-[100%]">
-          <div class="w-[50%]">
-            <%= text_input(f, :status,
-              placeholder: "enter status",
-              class:
-                "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
-            ) %>
-            <p class="pt-5">
-              <%= error_tag(f, :status) %>
-            </p>
+      </.form>
+    </div>
+  </div>
+
+  <%= if @error_modal == true do %>
+    <div class="fixed poppins-regular  shadow-xl h-[100vh] bg-white/60  inset-0  z-50 flex flex-col  justify-center items-center  mx-auto">
+      <div class="bg-white shadow-xl  rounded-xl shadow-gray-200 md:w-[500px] w-[300px]  flex flex-col items-center  h-[400px]">
+        <div class="flex flex-col w-[100%] p-2">
+          <div class="flex justify-between items-center">
+            <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+              Payment Unsuccesful
+            </h1>
+
+            <div
+              class="cursor-pointer h-[20px] w-[20px] flex justify-center items-center rounded-full shadow-xl shadow-gray-400"
+              phx-click="close_error_modal"
+            >
+              <%= Heroicons.icon("x-mark",
+                type: "solid",
+                class: "h-[20px] font-bold w-[20px]"
+              ) %>
+            </div>
           </div>
 
-          <div class="w-[50%]">
-            <%= text_input(f, :notes,
-              placeholder: "enter some ride notes",
-              class:
-                "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FECC18] focus:border-transparent"
-            ) %>
-            <p class="pt-5">
-              <%= error_tag(f, :notes) %>
-            </p>
-          </div>
+          <p class="bg-gradient-to-r from-purple-300 to-white w-[100%] h-[2px] my-2" />
         </div>
 
-        <div class="flex justify-end">
-          <%= submit("Save",
-            phx_disable_with: "Saving...",
-            class:
-              "bg-[#3C3E3E] cursor-pointer text-[#FECC18] cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 px-8 py-2 text-xl  flex justify-center items-center gap-2  rounded-xl"
+        <div class="flex flex-col justify-center items-center">
+          <%= Heroicons.icon("x-mark",
+            type: "solid",
+            class: "h-48  text-red-500  font-bold w-48"
           ) %>
+          <div class="flex flex-col justify-center items-center text-center">
+            <p class=" text-2xl jakrata-regular ">
+              <%= @error_message %>
+            </p>
+          </div>
         </div>
       </div>
-    </.form>
-  </div>
+    </div>
+  <% end %>
+
+  <%= if @success_modal == true do %>
+    <div class="fixed poppins-regular  shadow-xl h-[100vh] bg-white/60  inset-0  z-50 flex flex-col  justify-center items-center  mx-auto">
+      <div class="bg-white shadow-xl  rounded-xl shadow-gray-200 md:w-[500px] w-[300px]  flex flex-col items-center  h-[400px]">
+        <div class="flex flex-col w-[100%] p-2">
+          <div class="flex justify-between items-center">
+            <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+              Payment Successful
+            </h1>
+
+            <div
+              class="cursor-pointer h-[20px] w-[20px] flex justify-center items-center rounded-full shadow-xl shadow-gray-400"
+              phx-click="close_success_modal"
+            >
+              <%= Heroicons.icon("x-mark",
+                type: "solid",
+                class: "h-[20px] font-bold w-[20px]"
+              ) %>
+            </div>
+          </div>
+
+          <p class="bg-gradient-to-r from-purple-300 to-white w-[100%] h-[2px] my-2" />
+        </div>
+
+        <div class="flex flex-col justify-center items-center">
+          <%= Heroicons.icon("check",
+            type: "solid",
+            class: "h-48  text-green-500  font-bold w-48"
+          ) %>
+          <div class="flex flex-col justify-center items-center text-center">
+            <p class=" text-2xl jakrata-regular ">
+              The Payment was successful , you shall receive your payments within 48 hours
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

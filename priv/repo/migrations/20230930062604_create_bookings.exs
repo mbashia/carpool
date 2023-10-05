@@ -3,7 +3,7 @@ defmodule Carpool.Repo.Migrations.CreateBookings do
 
   def change do
     create table(:bookings) do
-      add :status, :string
+      add :phone_number, :string
       add :location_from, :string
       add :location_to, :string
       add :booking_latitude_to, :float

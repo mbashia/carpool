@@ -11,7 +11,7 @@ defmodule Carpool.Bookings.Booking do
     field :booking_latitude_from, :float
     field :booking_longitude_from, :float
     field :notes, :string
-    field :status, :string
+    field :phone_number, :string
     belongs_to :user, User, foreign_key: :user_id
     belongs_to :trip, Trip, foreign_key: :trip_id
 
@@ -22,7 +22,7 @@ defmodule Carpool.Bookings.Booking do
   def changeset(booking, attrs) do
     booking
     |> cast(attrs, [
-      :status,
+      :phone_number,
       :location_from,
       :location_to,
       :notes,
@@ -34,7 +34,7 @@ defmodule Carpool.Bookings.Booking do
       :booking_longitude_from
     ])
     |> validate_required([
-      :status,
+      :phone_number,
       :location_from,
       :location_to,
       :notes,
@@ -45,5 +45,10 @@ defmodule Carpool.Bookings.Booking do
       :booking_latitude_from,
       :booking_longitude_from
     ])
+    |> validate_format(
+      :phone_number,
+      ~r/^254\d{9}$/,
+      message: "Number has to start with 254 and have 12 digits"
+    )
   end
 end

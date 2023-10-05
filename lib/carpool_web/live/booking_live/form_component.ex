@@ -66,11 +66,9 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
   end
 
   def handle_event("pay", params, socket) do
-    IO.inspect(params["booking"])
-
     case Mpesas.make_request(
            1,
-           "254740769596",
+           params["booking"]["phone_number"],
            "reference",
            "description"
          ) do
@@ -95,7 +93,7 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
          |> assign(:location_from, params["booking"]["location_from"])
          |> assign(:location_to, params["booking"]["location_to"])
          |> assign(:trip_id, params["booking"]["trip_id"])
-         |> assign(:status, params["booking"]["status"])
+         |> assign(:phone_number, params["booking"]["phone_number"])
          |> assign(:notes, params["booking"]["notes"])
          |> factorial(socket.assigns.n, "Initiated", params)}
 
@@ -174,7 +172,7 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
         "location_from" => socket.assigns.location_from,
         "location_to" => socket.assigns.location_to,
         "notes" => socket.assigns.notes,
-        "status" => socket.assigns.status,
+        "phone_number" => socket.assigns.phone_number,
         "trip_id" => socket.assigns.trip_id,
         "user_id" => socket.assigns.user.id
       }

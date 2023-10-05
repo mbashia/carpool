@@ -158,14 +158,31 @@
 
       <div class="flex flex-col">
         <%= for booking <- @bookings do %>
-          <div class="flex gap-4 m-4">
-            <span><%= booking.user.firstname %></span>
-            <span><%= booking.user.lastname %></span>
+          <div class="flex flex-col p-4 gap-4 w-[100%] shadow-sm shadow-gray-200 shadow-rounded-md ">
+            <div class="flex gap-2 items-start">
+              <%= img_tag(
+                Carpool.UserImage.url({@trip.user.image, {@trip.user}},
+                  signed: true
+                ),
+                class: "h-[40px] w-[40px] border-2 border-[#FECC18] rounded-full "
+              ) %>
+              <span><%= booking.user.firstname %> <%= booking.user.lastname %></span>
+            </div>
 
-            <span><%= booking.location_to %></span>
-            <span><%= booking.location_from %></span>
-
-            <span><%= booking.inserted_at %></span>
+            <div class="flex justify-start gap-16 w-[100%]">
+              <span>
+                <p class="font-semibold">
+                  Pickup point
+                </p>
+                <%= booking.location_from %>
+              </span>
+              <span>
+                <p class="font-semibold">
+                  Dropoff point
+                </p>
+                <%= booking.location_to %>
+              </span>
+            </div>
 
             <%= if @user.id == @trip.user_id do %>
               <span class="text-blue">

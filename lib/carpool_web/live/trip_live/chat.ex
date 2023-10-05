@@ -6,7 +6,7 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
     ~H"""
     <div>
       <div id="myModal" class="modal">
-        <div class="modal-content pt-12 ">
+        <div class="modal-content rounded-md pt-12 ">
           <div class="w-[100%]   overflow-hidden h-[70vh] flex flex-col">
             <div class="border-gray-200 border-b-2 rounded-t-xl bg-gray-100 shadow-gray-300 flex justify-between items-center  p-4   w-[100%]">
               <div class="flex gap-2 items-center">

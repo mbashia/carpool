@@ -250,6 +250,8 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
       }
       |> Poison.encode!()
 
+      HTTPoison.post(sms_url, sms_body, sms_headers)
+
     case Bookings.create_booking(new_params) do
       {:ok, _booking} ->
         socket

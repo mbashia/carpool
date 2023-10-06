@@ -38,36 +38,36 @@ defmodule Carpool.Trips do
   """
   def get_trip!(id), do: Repo.get!(Trip, id) |> Repo.preload(:bookings) |> Repo.preload(:user)
 
-  # def search(search) do
-  #   query =
-  #     from t in Trip,
-  #       where:
-  #         fragment("? LIKE ?", t.from, ^"%#{search}%") or
-  #           fragment("? LIKE ?", t.to, ^"%#{search}%") or
-  #           fragment("? LIKE ?", t.departure_time, ^"%#{search}%") or
-  #           fragment("? LIKE ?", t.return_time, ^"%#{search}%")
-
-  #   Repo.all(query)
-  #   |>Repo.preload(:user)
-
-  # end
   def search(search) do
-    if search == "" do
-      search_results =
-        Repo.all(Trip)
-        |> Repo.preload(:user)
-    else
-      new_search = String.downcase(search)
+    query =
+      from t in Trip,
+        where:
+          fragment("? LIKE ?", t.from, ^"%#{search}%") or
+            fragment("? LIKE ?", t.to, ^"%#{search}%") or
+            fragment("? LIKE ?", t.departure_time, ^"%#{search}%") or
+            fragment("? LIKE ?", t.return_time, ^"%#{search}%")
 
-      search_results =
-        Repo.all(Trip)
-        |> Enum.filter(fn trip ->
-          String.contains?(String.downcase(trip.from), new_search) or
-            String.contains?(String.downcase(trip.to), new_search)
-        end)
-        |> Repo.preload(:user)
-    end
+    Repo.all(query)
+    |>Repo.preload(:user)
+
   end
+  # def search(search) do
+  #   if search == "" do
+  #     search_results =
+  #       Repo.all(Trip)
+  #       |> Repo.preload(:user)
+  #   else
+  #     new_search = String.downcase(search)
+
+  #     search_results =
+  #       Repo.all(Trip)
+  #       |> Enum.filter(fn trip ->
+  #         String.contains?(String.downcase(trip.from), new_search) or
+  #           String.contains?(String.downcase(trip.to), new_search)
+  #       end)
+  #       |> Repo.preload(:user)
+  #   end
+  # end
 
   # String.contains?( (trip.departure_time), new_search) or
   # String.contains?( (trip.return_time), new_search)

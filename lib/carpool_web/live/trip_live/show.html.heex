@@ -178,7 +178,7 @@
           <div class="flex flex-col p-4 gap-4 w-[100%] shadow-sm shadow-gray-200 shadow-rounded-md ">
             <div class="flex gap-2 items-start">
               <%= img_tag(
-                Carpool.UserImage.url({@trip.user.image, {@trip.user}},
+                Carpool.UserImage.url({booking.user.image, {booking.user}},
                   signed: true
                 ),
                 class: "h-[40px] w-[40px] border-2 border-[#FECC18] rounded-full "

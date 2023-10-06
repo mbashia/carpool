@@ -132,6 +132,10 @@
           <%= @trip.notes %>
         </p>
       </div>
+
+      <p>
+        This  car travels <%= @trip.kilometres_per_litre %> km per litre
+      </p>
       <div class="flex justify-between"></div>
       <p class="font-semibold text-xl">
         Trip by:
@@ -198,7 +202,7 @@
             </div>
 
             <%= if @user.id == @trip.user_id do %>
-              <span class="text-blue">
+              <span class="text-blue-500 underline">
                 <%= live_redirect("chat with #{booking.user.firstname} #{booking.user.lastname}",
                   to: Routes.trip_show_path(@socket, :chat, @trip, booking.user.id)
                 ) %>

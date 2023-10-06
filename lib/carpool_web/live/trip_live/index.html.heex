@@ -16,6 +16,18 @@
   Trips
 </div>
 
+<%= live_redirect(to: Routes.page_index_path(@socket, :index)) do %>
+  <div class="p-2 flex gap-2 items-center">
+    <%= Heroicons.icon("arrow-long-left",
+      type: "solid",
+      class: "h-6 text-[#3C3E3E]  w-6"
+    ) %>
+    <p>
+      Back
+    </p>
+  </div>
+<% end %>
+
 <div class="mt-6">
   <div class="flex justify-center gap-8 items-center w-[100%]">
     <.form let={f} phx-change="search" for={@changeset} class="w-[70%]">
@@ -101,6 +113,9 @@
             <%= trip.notes %>
           </p>
         </div>
+        <p>
+          This  car travels <%= trip.kilometres_per_litre %> km per litre
+        </p>
         <p class="font-semibold text-xl">
           Trip by:
         </p>

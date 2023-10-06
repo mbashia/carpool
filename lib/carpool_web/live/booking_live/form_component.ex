@@ -1,4 +1,5 @@
 defmodule CarpoolWeb.BookingLive.FormComponent do
+  alias Phoenix.LiveViewTest.DOM
   use CarpoolWeb, :live_component
 
   alias Carpool.Bookings
@@ -14,6 +15,8 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
      |> assign(:n, false)
      |> assign(:success_modal, false)
      |> assign(:error_message, "")
+     |> assign(:distance, 0.0)
+     |> assign(:fare, 0.0)
      |> assign(:error_modal, false)
      |> assign(:changeset, changeset)}
   end
@@ -25,7 +28,43 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
       |> Bookings.change_booking(booking_params)
       |> Map.put(:action, :validate)
 
-    {:noreply, assign(socket, :changeset, changeset)}
+    distance =
+      if booking_params["booking_latitude_to"] != "" &&
+           booking_params["booking_longitude_to"] != "" &&
+           booking_params["booking_latitude_from"] != "" &&
+           booking_params["booking_longitude_from"] != "" do
+        Geocalc.distance_between(
+          [
+            String.to_float(booking_params["booking_longitude_to"]),
+            String.to_float(booking_params["booking_latitude_to"])
+          ],
+          [
+            String.to_float(booking_params["booking_longitude_from"]),
+            String.to_float(booking_params["booking_latitude_from"])
+          ]
+        )
+      else
+        0
+      end
+
+    distance =
+      (distance / 1000)
+      |> Float.round(2)
+
+    fare =
+      if distance != 0.0 do
+        kilometers_per_litre = socket.assigns.trip.kilometres_per_litre |> String.to_integer()
+        price_of_fuel = 211
+        distance / kilometers_per_litre * price_of_fuel
+      else
+        0
+      end
+
+    {:noreply,
+     socket
+     |> assign(:distance, distance)
+     |> assign(:fare, fare)
+     |> assign(:changeset, changeset)}
   end
 
   def handle_event("save", %{"booking" => booking_params}, socket) do

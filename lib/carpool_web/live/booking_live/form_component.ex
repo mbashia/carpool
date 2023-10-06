@@ -10,8 +10,6 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
   def update(%{booking: booking} = assigns, socket) do
     changeset = Bookings.change_booking(booking)
 
-
-
     {:ok,
      socket
      |> assign(assigns)
@@ -30,9 +28,6 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
       socket.assigns.booking
       |> Bookings.change_booking(booking_params)
       |> Map.put(:action, :validate)
-
-
-
 
     distance =
       if booking_params["booking_latitude_to"] != "" &&
@@ -226,7 +221,6 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
     driver = Accounts.get_user!(socket.assigns.trip.user_id)
     rider = Accounts.get_user!(socket.assigns.user.id)
 
-
     sms_url = "https://api.tiaraconnect.io/api/messaging/sendsms"
 
     sms_headers = [
@@ -250,7 +244,7 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
       }
       |> Poison.encode!()
 
-      HTTPoison.post(sms_url, sms_body, sms_headers)
+    IO.inspect(HTTPoison.post(sms_url, sms_body, sms_headers))
 
     case Bookings.create_booking(new_params) do
       {:ok, _booking} ->

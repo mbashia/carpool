@@ -11,8 +11,8 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
           <div class="w-[100%]   overflow-hidden h-[70vh] flex flex-col">
             <div class="border-gray-200 border-b-2 rounded-t-xl bg-gray-100 shadow-gray-300 flex justify-between items-center  p-4   w-[100%]">
               <div class="flex gap-2 items-center">
-                <div class=" w-[40px] bg-[#887CF2] rounded-full h-[40px]  "></div>
-                <p class="text-[#887CF2] text-sm poppins-regular">
+                <div class=" w-[40px] bg-[#FECC18] rounded-full h-[40px]  "></div>
+                <p class="text-[#3C3E3E] text-sm poppins-regular">
                   <p><%= @receiver.email %></p>
                 </p>
               </div>
@@ -30,7 +30,7 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
                     </div>
                   <% else %>
                     <div class="flex  justify-end   ">
-                      <p class="  text-white p-2 md:h-[70px] break-words text-xs bg-[#887CF2] w-[200px]">
+                      <p class="  text-white p-2 md:h-[70px] break-words text-xs bg-[#3C3E3E]  w-[200px]">
                         <%= chat.text %>
                       </p>
                     </div>
@@ -50,7 +50,7 @@ defmodule CarpoolWeb.TripLive.ChatComponent do
                     ) %>
                   </div>
 
-                  <div class="p-2 flex justify-center items-center hover:scale-105 transition-all duration-500 ease-in-out rounded-md bg-[#7269EF] ">
+                  <div class="p-2 flex justify-center items-center hover:scale-105 transition-all duration-500 ease-in-out rounded-md bg-[#3C3E3E]">
                     <%= submit do %>
                       <%= Heroicons.icon("paper-airplane",
                         type: "solid",

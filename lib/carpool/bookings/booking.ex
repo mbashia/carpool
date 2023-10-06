@@ -45,8 +45,7 @@ defmodule Carpool.Bookings.Booking do
       :booking_latitude_to,
       :booking_longitude_to,
       :booking_latitude_from,
-      :booking_longitude_from,
-      :subscription
+      :booking_longitude_from
     ])
     |> validate_format(
       :phone_number,

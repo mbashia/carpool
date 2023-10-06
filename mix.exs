@@ -54,7 +54,8 @@ defmodule Carpool.MixProject do
       {:ex_heroicons, "~> 2.0.0"},
       {:waffle, "~> 1.1.5"},
       {:mpesa, "~> 0.1.2"},
-      {:waffle_ecto, "~> 0.0.11"}
+      {:waffle_ecto, "~> 0.0.11"},
+      {:geocalc, "~> 0.8"}
     ]
   end
 

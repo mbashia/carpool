@@ -1,5 +1,5 @@
 <div class="h-[100vh] w-[100%] bg-[#FECC18]">
-  <div class="bg-black/50 h-[100vh] py-8 flex justify-center flex-col items-center w-[100%]">
+  <div class=" h-[100vh] py-8 flex justify-center flex-col items-center w-[100%]">
     <%= form_for @changeset, Routes.user_registration_path(@conn, :create), [multipart: true], fn f -> %>
       <%= if @changeset.action do %>
         <div class="alert alert-danger">
@@ -8,11 +8,7 @@
       <% end %>
 
       <div class="bg-[#3C3E3E] md:h-[600px] flex justify-center  py-8 md:py-0 items-center gap-4 flex-col md:w-[800px]">
-        <%= Heroicons.icon("chat-bubble-oval-left-ellipsis",
-          type: "solid",
-          class: "h-8  text-[#7269EF] transition-all duration-500 ease-in-out rounded-xl w-8"
-        ) %>
-        <p class="text-[#7269EF] text-center text-xl poppins-regular">
+        <p class="text-[#FECC18] text-center text-xl poppins-regular">
           Register
         </p>
 
@@ -60,7 +56,7 @@
             <%= file_input(f, :image,
               required: true,
               class:
-                "w-[100%] h-[45px] bg-[#eff2f7] poppins-regular text-[#37404A] border border-transparent   focus:ring-0 border-none"
+                "w-[100%] h-[45px] p-2 bg-[#eff2f7] poppins-regular text-[#37404A] border border-transparent   focus:ring-0 border-none"
             ) %>
             <p class="pt-5">
               <%= error_tag(f, :image) %>
@@ -96,7 +92,7 @@
         <div class="flex justify-center items-center">
           <%= submit("Register",
             class:
-              "bg-[#7269EF]  px-4 py-2 text-[#eff2f7] text-xl hover:scale-105 transition-all ease-in-out duration-500 poppins-regular cursor-pointer"
+              "bg-[#FECC18]  px-4 py-2 text-[#3C3E3E] text-xl hover:scale-105 transition-all ease-in-out duration-500 poppins-regular cursor-pointer"
           ) %>
         </div>
 

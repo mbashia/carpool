@@ -4,10 +4,13 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
 
   alias Carpool.Bookings
   alias Carpool.Mpesas
+  alias Carpool.Accounts
 
   @impl true
   def update(%{booking: booking} = assigns, socket) do
     changeset = Bookings.change_booking(booking)
+
+
 
     {:ok,
      socket
@@ -27,6 +30,9 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
       socket.assigns.booking
       |> Bookings.change_booking(booking_params)
       |> Map.put(:action, :validate)
+
+
+
 
     distance =
       if booking_params["booking_latitude_to"] != "" &&
@@ -216,6 +222,33 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
       "user_id" => socket.assigns.user.id,
       "subscription" => socket.assigns.subscription
     }
+
+    driver = Accounts.get_user!(socket.assigns.trip.user_id)
+    rider = Accounts.get_user!(socket.assigns.user.id)
+
+
+    sms_url = "https://api.tiaraconnect.io/api/messaging/sendsms"
+
+    sms_headers = [
+      {
+        "Content-Type",
+        "application/json"
+      },
+      {
+        "Authorization",
+        "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyOTAiLCJvaWQiOjI5MCwidWlkIjoiYWUzMGRjZTItMjIzYi00ODUzLWJmMDItNDE5ZWI2MzMzY2Y5IiwiYXBpZCI6MTgzLCJpYXQiOjE2OTM1OTAzNDksImV4cCI6MjAzMzU5MDM0OX0.mG9d0tTkmx49OQKMKQFYKnIQMHFQEIckHBnGe5jTjg3fU95aHLxrtouqsPGr7Yi3GKFt674_ImiLtJavAa4OIw"
+      }
+    ]
+
+    sms_body =
+      %{
+        "from" => "TIARACONNECT",
+        "to" => socket.assigns.phone_number,
+        "message" =>
+          "Hello #{rider.firstname} ,Thanks for making a booking , #{driver.firstname} will be leaving at #{socket.assigns.trip.departure_time} and coming back at #{socket.assigns.trip.return_time} , Your pick up point is #{socket.assigns.location_from} and you will be dropped off at #{socket.assigns.location_to} . Thank you for choosing Kilipool .",
+        "refId" => "09wiwu088e"
+      }
+      |> Poison.encode!()
 
     case Bookings.create_booking(new_params) do
       {:ok, _booking} ->

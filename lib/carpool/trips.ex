@@ -48,9 +48,9 @@ defmodule Carpool.Trips do
             fragment("? LIKE ?", t.return_time, ^"%#{search}%")
 
     Repo.all(query)
-    |>Repo.preload(:user)
-
+    |> Repo.preload(:user)
   end
+
   # def search(search) do
   #   if search == "" do
   #     search_results =

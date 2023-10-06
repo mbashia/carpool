@@ -82,7 +82,7 @@
 
           <%= if @distance != 0.0  do %>
             <div class="flex justify-center p-2 bg-gray-100 rounded-md items-center">
-              <%= @distance %> KM Distance from your pickup point to your drop off point , for a daily subscription , you will pay <%= Float.ceil(
+             There is a <%= @distance %> KM Distance from your pickup point to your drop off point , for a daily subscription , you will pay <%= Float.ceil(
                 @fare
               ) %> , for a weekly subscription you will pay <%= Float.ceil(@fare * 7) %> and for a monthly subscription you will pay <%= Float.ceil(
                 @fare * 30

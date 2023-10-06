@@ -236,7 +236,7 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
 
     sms_body =
       %{
-        "from" => "TIARACONNECT",
+        "from" => "TIARACONECT",
         "to" => socket.assigns.phone_number,
         "message" =>
           "Hello #{rider.firstname} ,Thanks for making a booking , #{driver.firstname} will be leaving at #{socket.assigns.trip.departure_time} and coming back at #{socket.assigns.trip.return_time} , Your pick up point is #{socket.assigns.location_from} and you will be dropped off at #{socket.assigns.location_to} . Thank you for choosing Kilipool .",

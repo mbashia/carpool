@@ -379,6 +379,20 @@ Hooks.Location = {
     });
   },
 };
+Hooks.Navbar = {
+  mounted() {
+    const toggleButton = document.getElementById("toggleButton");
+    const sidebar = document.getElementById("sidebar");
+
+    toggleButton.addEventListener("click", () => {
+      sidebar.classList.toggle("-translate-x-full");
+    });
+
+    document.getElementById("sidebarContent").addEventListener("click", () => {
+      sidebar.classList.toggle("-translate-x-full");
+    });
+  },
+};
 
 let liveSocket = new LiveSocket("/live", Socket, {
   hooks: Hooks,

@@ -1,5 +1,5 @@
 <div>
-  <div class="w-[100%]  bg-[#3C3E3E] p-4">
+  <div class="w-[100%] hidden md:block bg-[#3C3E3E] p-4">
     <div class="w-[90%] mx-auto uppercase flex justify-between text-white ">
       <div class="flex cursor-pointer hover:text-[#FECC18] transition-all duration-500 ease-in-out  items-center gap-1">
         <p>Home</p>
@@ -50,13 +50,89 @@
     </div>
   </div>
 
-  <div class="bg-[#FECC18] md:h-[90vh] w-[100%]">
+  <nav phx-hook="Navbar" id="nav">
+    <div class="  bg-[#3C3E3E]  w-[100%] top 0  md:hidden flex items-center justify-between p-2">
+      <div>
+        <%= live_redirect to: Routes.page_index_path(@socket, :index) do %>
+          <p class="text-3xl poppins-regular text-white">
+            Kilipool
+          </p>
+        <% end %>
+      </div>
+      <button id="toggleButton" class=" flex flex-col  rounded-md gap-2  ">
+        <div class="h-[2px] bg-white w-[40px]" />
+        <div class="h-[2px] bg-white w-[40px]" />
+        <div class="h-[2px] bg-white w-[40px]" />
+      </button>
+    </div>
+
+    <div
+      id="sidebar"
+      class="fixed green top-0 left-0 h-full w-60 z-50 bg-white  text-black transition duration-300 transform -translate-x-full"
+    >
+      <div
+        class="flex flex-col poppins-regular text-xl gap-4 items-start p-4 pt-24 "
+        id="sidebarContent"
+      >
+        <a
+          href="#swiper"
+          class="     uppercase hover:scale-105 transition-all duration-500 ease-in-out  md:ml-8 ml-2"
+        >
+          Home
+        </a>
+
+        <a
+          href="#artists"
+          class="    uppercase hover:scale-105 transition-all duration-500 ease-in-out   md:ml-8 ml-2"
+        >
+          Artists
+        </a>
+
+        <a
+          href="#footer"
+          class="    uppercase hover:scale-105 transition-all duration-500 ease-in-out   md:ml-8 ml-2"
+        >
+          Contact
+        </a>
+        <a
+          href="#ourteam"
+          class="    uppercase hover:scale-105 transition-all duration-500 ease-in-out   md:ml-8 ml-2"
+        >
+          Team
+        </a>
+
+        <%= if @user_signed_in == true do %>
+          <%= link("Log out",
+            to: Routes.user_session_path(@socket, :delete),
+            method: :delete,
+            class:
+              "  uppercase hover:scale-105 transition-all duration-500 ease-in-out   md:ml-8 ml-2"
+          ) %>
+        <% else %>
+          <%= live_redirect("Register",
+            to: Routes.user_registration_path(@socket, :new),
+            class:
+              "  uppercase hover:scale-105 transition-all duration-500 ease-in-out   md:ml-8 ml-2"
+          ) %>
+          <%= live_redirect("Log in",
+            to: Routes.user_session_path(@socket, :new),
+            class:
+              "  uppercase hover:scale-105 transition-all duration-500 ease-in-out   md:ml-8 ml-2"
+          ) %>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+
+  <div class="bg-[#FECC18] md:h-[90vh] py-8 md:py-0 w-[100%]">
     <div class="flex md:justify-between justify-around md:flex-row flex-col items-center h-[100%] mx-auto w-[90%]">
       <div class="md:w-[45%] flex flex-col gap-4">
         <h3 class="text-[#3C3E3E]  font-semibold text-4xl md:text-7xl">
           Earn . Connect . Contribute to Society
         </h3>
-        <p class="text-sm md:text-base w-[70%] md:w-[100%]">Partner with us to drive your own livelihood and more</p>
+        <p class="text-sm md:text-base w-[70%] md:w-[100%]">
+          Partner with us to drive your own livelihood and more
+        </p>
         <div class="w-[100%">
           <button class="bg-[#3C3E3E] p-4 rounded-3xl uppercase text-white">
             Sign Up Now
@@ -120,7 +196,7 @@
   <div class="h-[100vh] flex flex-col  justify-center items-center">
     <div class="w-[90%] flex md:flex-row flex-col justify-between items-center mx-auto">
       <div class="flex md:w-[47%] flex-col gap-2">
-        <p class="text-[#3B3B3B] text-4xl font-semibold">
+        <p class="text-[#3B3B3B] md:text-4xl text-2xl font-semibold">
           Trusted Carpooling Service Around Kilimani
         </p>
         <div class="flex gap-0 flex-col  items-start">
@@ -165,7 +241,7 @@
       <div class="flex flex-col gap-2">
         <p class="text-[#FFC61C]">Kilimani Express</p>
         <p class="w-[60%]">
-         We Share Because We Care
+          We Share Because We Care
         </p>
       </div>
       <div class="flex flex-col gap-2">

@@ -29,8 +29,8 @@
 <% end %>
 
 <div class="mt-6">
-  <div class="flex justify-center gap-8 items-center w-[100%]">
-    <.form let={f} phx-change="search" for={@changeset} class="w-[70%]">
+  <div class="flex md:fle-row flex-col-reverse  justify-center gap-8 items-center w-[100%]">
+    <.form let={f} phx-change="search" for={@changeset} class="md:w-[70%] w-[90%]">
       <%= text_input(f, :search,
         placeholder: "Search trip",
         class:
@@ -44,7 +44,7 @@
     ) %>
   </div>
 
-  <div class="w-[90%] mx-auto mt-8 gap-8 grid grid-cols-3 ">
+  <div class="w-[90%] mx-auto mt-8 gap-8 grid md:grid-cols-3 ">
     <%= for trip <- @trips do %>
       <div class="bg-white  flex flex-col gap-2 rounded-md px-8 py-4 shadow-sm shadow-gray-500">
         <div class="flex justify-end gap-2 ">

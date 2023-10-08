@@ -20,9 +20,9 @@
         <%= hidden_input(f, :booking_latitude_from, id: "booking_latitude_from_input") %>
         <%= hidden_input(f, :booking_longitude_from, id: "booking_longitude_from_input") %>
         <%= hidden_input(f, :trip_id, value: @trip.id) %>
-        <div class="flex gap-2 w-[80%] mx-auto flex-col">
-          <div class="flex gap-2 flex-row w-[100%]">
-            <div class="w-[50%]">
+        <div class="flex gap-2 md:w-[80%] w-[90%] mx-auto flex-col">
+          <div class="flex gap-2 md:flex-row flex-col w-[100%]">
+            <div class="md:w-[50%]">
               <%= text_input(f, :location_from,
                 id: "booking_input2",
                 placeholder: "enter picking location",
@@ -33,7 +33,7 @@
                 <%= error_tag(f, :location_from) %>
               </p>
             </div>
-            <div class="w-[50%]">
+            <div class="md:w-[50%]">
               <%= text_input(f, :location_to,
                 id: "booking_input1",
                 placeholder: "enter destination",
@@ -45,8 +45,8 @@
               </p>
             </div>
           </div>
-          <div class="flex gap-2 flex-row w-[100%]">
-            <div class="w-[50%]">
+          <div class="flex gap-2 md:flex-row flex-col w-[100%]">
+            <div class="md:w-[30%]">
               <%= text_input(f, :phone_number,
                 placeholder: "enter your mpesa phone number",
                 class:
@@ -57,7 +57,7 @@
               </p>
             </div>
 
-            <div class="w-[50%]">
+            <div class="md:w-[30%]">
               <%= text_input(f, :notes,
                 placeholder: "enter some ride notes",
                 class:
@@ -68,7 +68,7 @@
               </p>
             </div>
 
-            <div class="w-[50%]">
+            <div class="md:w-[30%]">
               <%= select(f, :subscription, ["daily", "weekly", "monthly"],
                 prompt: "Select a subscription",
                 class:

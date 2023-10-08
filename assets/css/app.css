@@ -88,7 +88,13 @@ html {
   margin: 15vh auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 60%;
+}
+
+@media screen and (max-width: 768px) {
+  .phx-modal-content {
+    width: 90%;
+  }
 }
 
 .phx-modal-close {

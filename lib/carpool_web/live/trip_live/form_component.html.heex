@@ -17,9 +17,9 @@
     <%= hidden_input(f, :latitude_to, id: "latitude_to_input") %>
     <%= hidden_input(f, :longitude_from, id: "longitude_from_input") %>
     <%= hidden_input(f, :longitude_to, id: "longitude_to_input") %>
-    <div class="flex gap-2 w-[80%] mx-auto flex-col">
-      <div class="flex gap-2 flex-row w-[100%]">
-        <div class="w-[50%]">
+    <div class="flex gap-2 md:w-[80%] w-[90%] mx-auto flex-col">
+      <div class="flex gap-2 md:flex-row flex-col w-[100%]">
+        <div class="md:w-[50%]">
           <%= label(f, :origin_location) %>
 
           <%= text_input(f, :from,
@@ -33,7 +33,7 @@
           </p>
         </div>
 
-        <div class="w-[50%]">
+        <div class="md:w-[50%]">
           <%= label(f, :destination_location) %>
 
           <%= text_input(f, :to,
@@ -47,8 +47,8 @@
           </p>
         </div>
       </div>
-      <div class="flex gap-2 flex-row w-[100%]">
-        <div class="w-[50%]">
+      <div class="flex gap-2 md:flex-row flex-col w-[100%]">
+        <div class="md:w-[50%]">
           <%= label(f, :capacity) %>
 
           <%= text_input(f, :capacity,
@@ -61,7 +61,7 @@
           </p>
         </div>
 
-        <div class="w-[50%]">
+        <div class="md:w-[50%]">
           <%= label(f, :notes) %>
 
           <%= text_input(f, :notes,
@@ -74,8 +74,8 @@
           </p>
         </div>
       </div>
-      <div class="flex gap-2 flex-row w-[100%]">
-        <div class="w-[50%]">
+      <div class="flex gap-2 md:flex-row flex-col w-[100%]">
+        <div class="md:w-[50%]">
           <%= label(f, :departure) %>
 
           <%= time_input(f, :departure_time,
@@ -88,7 +88,7 @@
           </p>
         </div>
 
-        <div class="w-[50%]">
+        <div class="md:w-[50%]">
           <%= label(f, :return) %>
 
           <%= time_input(f, :return_time,

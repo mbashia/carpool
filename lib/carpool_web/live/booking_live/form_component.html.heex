@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="flex gap-2 md:flex-row flex-col w-[100%]">
-            <div class="md:w-[30%]">
+            <div class="md:w-[50%]">
               <%= text_input(f, :phone_number,
                 placeholder: "enter your mpesa phone number",
                 class:
@@ -57,7 +57,7 @@
               </p>
             </div>
 
-            <div class="md:w-[30%]">
+            <div class="md:w-[50%]">
               <%= text_input(f, :notes,
                 placeholder: "enter some ride notes",
                 class:
@@ -68,7 +68,10 @@
               </p>
             </div>
 
-            <div class="md:w-[30%]">
+      
+          </div>
+
+                <div class="md:w-[100%]">
               <%= select(f, :subscription, ["daily", "weekly", "monthly"],
                 prompt: "Select a subscription",
                 class:
@@ -78,7 +81,6 @@
                 <%= error_tag(f, :subscription) %>
               </p>
             </div>
-          </div>
 
           <%= if @distance != 0.0  do %>
             <div class="flex justify-center p-2 bg-gray-100 rounded-md items-center">

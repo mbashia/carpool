@@ -221,30 +221,30 @@ defmodule CarpoolWeb.BookingLive.FormComponent do
     driver = Accounts.get_user!(socket.assigns.trip.user_id)
     rider = Accounts.get_user!(socket.assigns.user.id)
 
-    sms_url = "https://api.tiaraconnect.io/api/messaging/sendsms"
+    # sms_url = "https://api.tiaraconnect.io/api/messaging/sendsms"
 
-    sms_headers = [
-      {
-        "Content-Type",
-        "application/json"
-      },
-      {
-        "Authorization",
-        "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyOTAiLCJvaWQiOjI5MCwidWlkIjoiYWUzMGRjZTItMjIzYi00ODUzLWJmMDItNDE5ZWI2MzMzY2Y5IiwiYXBpZCI6MTgzLCJpYXQiOjE2OTM1OTAzNDksImV4cCI6MjAzMzU5MDM0OX0.mG9d0tTkmx49OQKMKQFYKnIQMHFQEIckHBnGe5jTjg3fU95aHLxrtouqsPGr7Yi3GKFt674_ImiLtJavAa4OIw"
-      }
-    ]
+    # sms_headers = [
+    #   {
+    #     "Content-Type",
+    #     "application/json"
+    #   },
+    #   {
+    #     "Authorization",
+    #     "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyOTAiLCJvaWQiOjI5MCwidWlkIjoiYWUzMGRjZTItMjIzYi00ODUzLWJmMDItNDE5ZWI2MzMzY2Y5IiwiYXBpZCI6MTgzLCJpYXQiOjE2OTM1OTAzNDksImV4cCI6MjAzMzU5MDM0OX0.mG9d0tTkmx49OQKMKQFYKnIQMHFQEIckHBnGe5jTjg3fU95aHLxrtouqsPGr7Yi3GKFt674_ImiLtJavAa4OIw"
+    #   }
+    # ]
 
-    sms_body =
-      %{
-        "from" => "TIARACONECT",
-        "to" => socket.assigns.phone_number,
-        "message" =>
-          "Hello #{rider.firstname} ,Thanks for making a booking , #{driver.firstname} will be leaving at #{socket.assigns.trip.departure_time} and coming back at #{socket.assigns.trip.return_time} , Your pick up point is #{socket.assigns.location_from} and you will be dropped off at #{socket.assigns.location_to} . Thank you for choosing Kilipool .",
-        "refId" => "09wiwu088e"
-      }
-      |> Poison.encode!()
+    # sms_body =
+    #   %{
+    #     "from" => "TIARACONECT",
+    #     "to" => socket.assigns.phone_number,
+    #     "message" =>
+    #       "Hello #{rider.firstname} ,Thanks for making a booking , #{driver.firstname} will be leaving at #{socket.assigns.trip.departure_time} and coming back at #{socket.assigns.trip.return_time} , Your pick up point is #{socket.assigns.location_from} and you will be dropped off at #{socket.assigns.location_to} . Thank you for choosing Kilipool .",
+    #     "refId" => "09wiwu088e"
+    #   }
+    #   |> Poison.encode!()
 
-    IO.inspect(HTTPoison.post(sms_url, sms_body, sms_headers))
+    # IO.inspect(HTTPoison.post(sms_url, sms_body, sms_headers))
 
     case Bookings.create_booking(new_params) do
       {:ok, _booking} ->

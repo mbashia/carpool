@@ -43,9 +43,7 @@ defmodule Carpool.Trips do
       from t in Trip,
         where:
           fragment("? LIKE ?", t.from, ^"%#{search}%") or
-            fragment("? LIKE ?", t.to, ^"%#{search}%") or
-            fragment("? LIKE ?", t.departure_time, ^"%#{search}%") or
-            fragment("? LIKE ?", t.return_time, ^"%#{search}%")
+            fragment("? LIKE ?", t.to, ^"%#{search}%")
 
     Repo.all(query)
     |> Repo.preload(:user)

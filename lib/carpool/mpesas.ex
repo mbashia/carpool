@@ -4,8 +4,8 @@ defmodule Carpool.Mpesas do
   """
 
   @doc false
-   @doc false
-   def get_url do
+  @doc false
+  def get_url do
     "https://sandbox.safaricom.co.ke"
   end
 

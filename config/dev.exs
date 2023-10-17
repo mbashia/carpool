@@ -2,6 +2,8 @@ import Config
 
 # Configure your database
 config :carpool, Carpool.Repo,
+  username: "root",
+  password: "Michael@11",
   database: "carpool_dev",
   hostname: "localhost",
   stacktrace: true,
@@ -25,7 +27,7 @@ config :mpesa,
 config :carpool, CarpoolWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 5500],
+  http: [ip: {127, 0, 0, 1}, port: 6100],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,

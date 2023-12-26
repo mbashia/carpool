@@ -21,6 +21,13 @@ defmodule CarpoolWeb.Router do
     pipe_through :browser
 
     live "/", PageLive.Index, :index
+
+    live "/image", ImageLive.Index, :index
+    live "/image/new", ImageLive.Index, :new
+    live "/image/:id/edit", ImageLive.Index, :edit
+
+    live "/image/:id", ImageLive.Show, :show
+    live "/image/:id/show/edit", ImageLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

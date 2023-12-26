@@ -1,0 +1,29 @@
+<div>
+  <h2><%= @title %></h2>
+
+  <.form
+    let={f}
+    for={@changeset}
+    id="image-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save"
+  >
+    <%= label(f, :author) %>
+    <%= text_input(f, :author) %>
+    <%= error_tag(f, :author) %>
+    <%= label(f, :image) %>
+    <%= live_file_input(@uploads.image) %>
+
+    <%= for entry <- @uploads.image.entries do %>
+      <%= live_img_preview(entry, style: "max-width: 200px; max-height: 200px;") %>
+      <button phx-click="cancel-upload" phx-value-ref={entry.ref}>
+        Cancel
+      </button>
+    <% end %>
+
+    <div>
+      <%= submit("Save", phx_disable_with: "Saving...") %>
+    </div>
+  </.form>
+</div>

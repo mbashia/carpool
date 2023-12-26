@@ -20,7 +20,7 @@ defmodule CarpoolWeb.Endpoint do
     at: "/",
     from: :carpool,
     gzip: false,
-    only: ~w(assets fonts images favicon.ico robots.txt)
+    only: ~w(assets fonts images favicon.ico robots.txt uploads)
 
   plug Plug.Static, at: "/uploads", from: Path.expand(~c"./uploads"), gzip: false
 
